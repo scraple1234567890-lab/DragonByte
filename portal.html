@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="StarSpell Academy — create your account to join the Lore Board community." />
+    <title>StarSpell Academy — Sign up</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body class="quizPage">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="top"></div>
+
+    <header class="header" role="banner">
+      <nav class="nav container" aria-label="Primary">
+        <a class="brand" href="./index.html#top" aria-label="Home">
+          <span class="brandText">StarSpell Academy</span>
+        </a>
+
+        <button class="iconBtn navToggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">
+          <span class="srOnly">Open menu</span>
+          <span class="hamburger" aria-hidden="true"></span>
+        </button>
+
+        <div class="navLinks" id="navLinks">
+          <a href="./quiz.html">Sorting quiz</a>
+          <a href="./posts.html">Posts</a>
+          <div class="profileMenu" id="profileMenu" data-default-display="inline-flex" style="display: none">
+            <button
+              class="btn ghost profileTrigger"
+              type="button"
+              id="profileMenuToggle"
+              aria-expanded="false"
+              aria-haspopup="menu"
+              aria-controls="profileMenuList"
+              aria-label="Open account menu"
+            >
+              <span class="srOnly">Profile</span>
+              <span class="profileAvatar profileAvatar--menu" id="profileAvatar">
+                <span class="profileAvatarPlaceholder" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                    <path
+                      d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Zm0 2c-3.33 0-10 1.67-10 5v1h20v-1c0-3.33-6.67-5-10-5Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+                <img alt="" loading="lazy" />
+              </span>
+              <span class="profileCaret" aria-hidden="true">▾</span>
+            </button>
+            <div class="profileMenuList" id="profileMenuList" role="menu" aria-hidden="true">
+              <a href="./profile.html" role="menuitem">View profile</a>
+              <button id="logoutBtn" type="button" role="menuitem">Log out</button>
+            </div>
+          </div>
+          <a class="btn primary magentaGlow" href="./portal.html" data-auth-target="login-cta">Open the login portal</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="section">
+        <div class="container authGrid">
+          <div class="card">
+            <h3>Sign up</h3>
+            <p class="muted">Create your StarSpell account to join the Lore Board community.</p>
+            <form id="signupForm">
+              <div class="field">
+                <label for="signupEmail">Email</label>
+                <input id="signupEmail" name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="field">
+                <label for="signupPassword">Password</label>
+                <input id="signupPassword" name="password" type="password" autocomplete="new-password" required />
+              </div>
+              <div class="actions">
+                <button class="btn secondary" type="submit">Create account</button>
+              </div>
+            </form>
+            <p class="muted small">Already have an account? <a href="./login.html">Go to the login page.</a></p>
+          </div>
+
+          <div class="card" id="authSuccessMessage" style="display: none">
+            <h3>Login successful</h3>
+            <p class="muted">
+              You’re signed in as <span data-auth-email>your account</span>. Head to Posts to share a note or refresh to stay in sync.
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="./posts.html">Go to Posts</a>
+            </div>
+          </div>
+
+          <div class="actions" style="grid-column: 1 / -1; display: flex; gap: 10px; flex-wrap: wrap;">
+            <p id="authStatus" class="muted small" aria-live="polite" style="flex: 1 1 auto">Checking your session...</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footerRow">
+        <p class="muted small">© <span id="year"></span> StarSpell Academy. Keep listening to the halls.</p>
+        <a class="muted small" href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+
+    <script src="./script.js" defer></script>
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
