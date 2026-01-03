@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>StarSpell Academy | Posts</title>
+<link href="./styles.css" rel="stylesheet"/>
+
+
+
+    <style>
+      /* =========================
+         HEADER: force one horizontal row (desktop)
+         ========================= */
+      @media (min-width: 900px) {
+        .siteHeader .brand { min-width: 0; flex: 0 1 auto; }
+        .siteHeader .brandText { min-width: 0; }
+
+        .siteHeader .nav { flex: 1 1 auto; justify-content: flex-end; }
+
+        .siteHeader .navMenu {
+          display: flex !important;
+          flex-wrap: nowrap !important;
+          align-items: center !important;
+          gap: 8px !important;
+          max-width: none !important;
+          white-space: nowrap;
+        }
+
+        .siteHeader .navLink,
+        .siteHeader .navCta {
+          align-items: center;
+          height: 40px;
+        }
+
+        .siteHeader .navLink { padding: 10px 10px; }
+        .siteHeader .navCta { padding: 10px 12px; }
+      }
+    </style>
+
+  </head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="siteHeader" role="banner" id="top">
+      <div class="container headerInner">
+        <a class="brand" href="./index.html" aria-label="Go to homepage">
+          <span class="brandMark" aria-hidden="true">
+            <img src="./assets/logo.svg" alt="" loading="lazy" />
+          </span>
+          <span class="brandText">
+            <span class="brandName">DragonByte</span>
+            <span class="brandTag">Network setup • documentation • recovery</span>
+          </span>
+        </a>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <button class="navToggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+            <span class="navToggleBars" aria-hidden="true"></span>
+          </button>
+
+          <div class="navMenu" id="navMenu">
+            <a class="btn btnGhost navCta" href="./posts.html">Posts</a>
+            <a class="navLink" href="./services.html">Services</a>
+            <a class="navLink" href="./documentation.html">Documentation</a>
+            <a class="navLink" href="./training.html">Training</a>
+            <a class="navLink" href="./recovery-plan.html">Recovery Plan</a>
+            <a class="btn btnPrimary navCta" href="./contact.html#book">Book a Consultation</a>
+
+            <a class="btn btnPrimary navCta" href="./portal.html" data-auth-target="login-cta">Open Login Portal</a>
+
+            <div class="profileMenu" data-default-display="inline-flex" id="profileMenu" style="display: none">
+              <button
+                class="btn ghost profileTrigger"
+                type="button"
+                id="profileMenuToggle"
+                aria-expanded="false"
+                aria-haspopup="menu"
+                aria-controls="profileMenuList"
+                aria-label="Open account menu"
+              >
+                <span class="srOnly">Profile</span>
+                <span class="profileAvatar profileAvatar--menu" id="profileAvatar">
+                  <span class="profileAvatarPlaceholder" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                      <path
+                        d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Zm0 2c-3.33 0-10 1.67-10 5v1h20v-1c0-3.33-6.67-5-10-5Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <img alt="" loading="lazy" />
+                </span>
+                <span class="profileCaret" aria-hidden="true">▾</span>
+              </button>
+              <div class="profileMenuList" id="profileMenuList" role="menu" aria-hidden="true">
+                <a href="./profile.html" role="menuitem">View profile</a>
+                <button id="logoutBtn" type="button" role="menuitem">Log out</button>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="headerGlow" aria-hidden="true"></div>
+    </header>
+<main class="section" id="main">
+<div class="container postLayout">
+<div class="postHeader">
+<div>
+<h1>Posts</h1>
+</div>
+<div class="actions" style="gap: 0.5rem; align-items: center;">
+<p aria-live="polite" class="muted" id="must-login" style="margin: 0">You must be logged in to post.</p>
+<button aria-expanded="false" class="btn heroCta magentaGlow" id="share-post-btn" type="button">Share a post</button>
+</div>
+</div>
+<section class="card" hidden="" id="composer-card">
+<div class="postComposerHeader">
+<div>
+<p class="kicker">Share a post</p>
+<p class="muted small">Write a short note for the Lore Board. (2000 characters max)</p>
+</div>
+<button class="btn ghost" id="close-composer" type="button">Close</button>
+</div>
+<form class="postForm" id="new-post-form">
+<label class="muted small" for="post-content">What would you like to share?</label>
+<textarea id="post-content" maxlength="2000" name="content" required="" rows="4"></textarea>
+<div class="actions">
+<button class="btn primary" id="post-submit" type="submit">Post</button>
+</div>
+<p aria-live="polite" class="muted small" id="post-status"></p>
+</form>
+</section>
+<section aria-live="polite" class="card">
+<div class="sectionHead loreBoardHeader">
+<div class="loreTitleWrap">
+<span aria-hidden="true" class="loreSigil">✶</span>
+<h2 class="loreTitle">Lore Board</h2>
+<span aria-hidden="true" class="loreSigil">✶</span>
+</div>
+</div>
+<div class="postFeed" id="posts"></div>
+</section>
+</div>
+</main>
+<script defer="" src="./script.js"></script>
+<script src="./js/app.js" type="module"></script>
+<script src="./js/posts.js" type="module"></script>
+</body>
+</html>
