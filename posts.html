@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>StarSpell Academy | Posts</title>
+<link href="./styles.css" rel="stylesheet"/>
+
+
+
+    <style>
+      /* =========================
+         HEADER: force one horizontal row (desktop)
+         ========================= */
+      @media (min-width: 900px) {
+        .siteHeader .brand { min-width: 0; flex: 0 1 auto; }
+        .siteHeader .brandText { min-width: 0; }
+
+        .siteHeader .nav { flex: 1 1 auto; justify-content: flex-end; }
+
+        .siteHeader .navMenu {
+          display: flex !important;
+          flex-wrap: nowrap !important;
+          align-items: center !important;
+          gap: 8px !important;
+          max-width: none !important;
+          white-space: nowrap;
+        }
+
+        .siteHeader .navLink,
+        .siteHeader .navCta {
+          align-items: center;
+          height: 40px;
+        }
+
+        .siteHeader .navLink { padding: 10px 10px; }
+        .siteHeader .navCta { padding: 10px 12px; }
+      }
+    </style>
+
+  </head>
+<body class="postsPage">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="siteHeader" role="banner" id="top">
+      <div class="container headerInner">
+        <a class="brand" href="./index.html" aria-label="Go to homepage">
+          <span class="brandMark" aria-hidden="true">
+            <img src="./assets/logo.svg" alt="" loading="lazy" />
+          </span>
+          <span class="brandText">
+            <span class="brandName">DragonByte</span>
+            <span class="brandTag">Network setup • documentation • recovery</span>
+          </span>
+        </a>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <button class="navToggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+            <span class="navToggleBars" aria-hidden="true"></span>
+          </button>
+
+          <div class="navMenu" id="navMenu">
+            <a class="btn btnGhost navCta" href="./posts.html">Posts</a>
+            <a class="navLink" href="./services.html">Services</a>
+            <a class="navLink" href="./documentation.html">Documentation</a>
+            <a class="navLink" href="./training.html">Training</a>
+            <a class="navLink" href="./recovery-plan.html">Recovery Plan</a>
+            <a class="btn btnPrimary navCta" href="./contact.html#book">Book a Consultation</a>
+
+            <a class="btn btnPrimary navCta" href="./portal.html" data-auth-target="login-cta">Open Login Portal</a>
+
+            <div class="profileMenu" data-default-display="inline-flex" id="profileMenu" style="display: none">
+              <button
+                class="btn ghost profileTrigger"
+                type="button"
+                id="profileMenuToggle"
+                aria-expanded="false"
+                aria-haspopup="menu"
+                aria-controls="profileMenuList"
+                aria-label="Open account menu"
+              >
+                <span class="srOnly">Profile</span>
+                <span class="profileAvatar profileAvatar--menu" id="profileAvatar">
+                  <span class="profileAvatarPlaceholder" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                      <path
+                        d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Zm0 2c-3.33 0-10 1.67-10 5v1h20v-1c0-3.33-6.67-5-10-5Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <img alt="" loading="lazy" />
+                </span>
+                <span class="profileCaret" aria-hidden="true">▾</span>
+              </button>
+              <div class="profileMenuList" id="profileMenuList" role="menu" aria-hidden="true">
+                <a href="./profile.html" role="menuitem">View profile</a>
+                <button id="logoutBtn" type="button" role="menuitem">Log out</button>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="headerGlow" aria-hidden="true"></div>
+    </header>
+<main class="section" id="main">
+<div class="container postLayout">
+<div class="postHeader">
+<div>
+<h1>Posts</h1>
+</div>
+<div class="actions" style="gap: 0.5rem; align-items: center;">
+<p aria-live="polite" class="muted" id="must-login" style="margin: 0">You must be logged in to post.</p>
+<button aria-expanded="false" class="btn heroCta magentaGlow btnSm" id="share-post-btn" type="button">Share a post</button>
+<button aria-expanded="false" class="btn btnGhost navCta btnSm" id="share-article-btn" type="button">Write an article</button>
+</div>
+</div>
+
+<section class="card" hidden="" id="composer-card">
+<div class="postComposerHeader">
+<div>
+<p class="kicker">Share a post</p>
+<p class="muted small">Write a short note for the Lore Board. (2000 characters max)</p>
+</div>
+<button class="btn ghost" id="close-composer" type="button">Close</button>
+</div>
+<form class="postForm" id="new-post-form">
+<label class="muted small" for="post-content">What would you like to share?</label>
+<textarea id="post-content" maxlength="2000" name="content" required="" rows="4"></textarea>
+<div class="actions">
+<button class="btn primary" id="post-submit" type="submit">Post</button>
+</div>
+<p aria-live="polite" class="muted small" id="post-status"></p>
+</form>
+</section>
+<section class="card" hidden id="article-composer-card">
+  <div class="postComposerHeader">
+    <div>
+      <p class="kicker">Write an article</p>
+      <p class="muted small">Create a longer writeup for the community. (Title 120 chars, body 12,000 chars max)</p>
+    </div>
+    <button class="btn ghost" id="close-article-composer" type="button">Close</button>
+  </div>
+
+  <form class="postForm" id="new-article-form">
+    <label class="muted small" for="article-title">Title</label>
+    <input id="article-title" name="title" maxlength="120" required type="text" autocomplete="off"/>
+
+    <label class="muted small" for="article-editor">Article</label>
+
+    <div class="richEditorShell">
+      <div class="richToolbar" id="article-toolbar" role="toolbar" aria-label="Article formatting toolbar">
+        <button class="btn btnGhost btnSm" type="button" data-cmd="bold" aria-label="Bold"><strong>B</strong></button>
+        <button class="btn btnGhost btnSm" type="button" data-cmd="italic" aria-label="Italic"><em>I</em></button>
+        <button class="btn btnGhost btnSm" type="button" data-cmd="underline" aria-label="Underline"><span style="text-decoration: underline;">U</span></button>
+
+        <span class="richDivider" aria-hidden="true"></span>
+
+        <button class="btn btnGhost btnSm" type="button" data-block="h2" aria-label="Heading">H2</button>
+        <button class="btn btnGhost btnSm" type="button" data-block="h3" aria-label="Subheading">H3</button>
+        <button class="btn btnGhost btnSm" type="button" data-cmd="insertUnorderedList" aria-label="Bulleted list">• List</button>
+        <button class="btn btnGhost btnSm" type="button" data-cmd="insertOrderedList" aria-label="Numbered list">1. List</button>
+        <button class="btn btnGhost btnSm" type="button" data-block="blockquote" aria-label="Quote">Quote</button>
+
+        <span class="richDivider" aria-hidden="true"></span>
+
+        <button class="btn btnGhost btnSm" type="button" id="article-link-btn" aria-label="Insert link">Link</button>
+        <button class="btn btnGhost btnSm" type="button" id="article-inline-image-btn" aria-label="Insert image">Insert image</button>
+        <input id="article-inline-image" type="file" accept="image/*" multiple hidden />
+
+        <span class="richDivider" aria-hidden="true"></span>
+
+        <button class="btn btnGhost btnSm" type="button" data-cmd="removeFormat" aria-label="Remove formatting">Clear format</button>
+
+        <div class="richImageControls" id="article-image-controls" hidden>
+          <span class="muted small" aria-live="polite" id="article-image-selected">Image selected</span>
+          <label class="srOnly" for="article-image-size">Image size</label>
+          <select id="article-image-size" class="richSelect" aria-label="Image size">
+            <option value="md">Medium</option>
+            <option value="sm">Small</option>
+            <option value="lg">Large</option>
+            <option value="full">Full</option>
+            <option value="custom">Custom</option>
+          </select>
+
+          <label class="srOnly" for="article-image-align">Image alignment</label>
+          <select id="article-image-align" class="richSelect" aria-label="Image alignment">
+            <option value="center">Center</option>
+            <option value="left">Left</option>
+            <opti
+          <div class="richScale" id="article-image-scale-wrap">
+            <span class="muted small">Scale</span>
+            <input id="article-image-scale" class="richRange" type="range" min="10" max="100" step="1" value="55" aria-label="Image scale percent"/>
+            <input id="article-image-scale-number" class="richNumber" type="number" min="10" max="100" step="1" value="55" aria-label="Image scale percent number"/>
+            <span class="muted small">%</span>
+          </div>
+on value="right">Right</option>
+          </select>
+
+          <button class="btn btnGhost btnSm" type="button" id="article-image-remove">Remove image</button>
+        </div>
+
+        <p class="muted small richHint" style="margin: 0; flex-basis: 100%;">Tip: Drag and drop images into the editor, or use “Insert image”.</p>
+      </div>
+
+      <div
+        id="article-editor"
+        class="richEditor"
+        contenteditable="true"
+        role="textbox"
+        aria-multiline="true"
+        data-placeholder="Write your article…"
+      ></div>
+    </div>
+
+    <!-- Hidden field used for saving sanitized HTML to Supabase -->
+    <textarea id="article-content" name="content" maxlength="200000" hidden></textarea>
+
+
+    <label class="muted small" for="article-image">Cover image (optional)</label>
+    <input id="article-image" name="image" type="file" accept="image/*" />
+    <p class="muted small" id="article-image-help" style="margin: -6px 0 0;">Choose an image (up to 15MB). We'll automatically resize and compress it before upload.</p>
+
+    <div class="articleImagePreview" id="article-image-preview" hidden>
+      <img alt="Selected cover image preview" loading="lazy" />
+      <button class="btn btnGhost btnSm" id="article-image-clear" type="button">Remove image</button>
+    </div>
+
+    <div class="actions">
+      <button class="btn primary" id="article-submit" type="submit">Publish</button>
+    </div>
+    <p aria-live="polite" class="muted small" id="article-status"></p>
+  </form>
+</section>
+<section aria-live="polite" class="card feedCard articlesCard articlesNarrow">
+  <div class="sectionHead loreBoardHeader articlesHeader">
+    <div class="articlesTopRow">
+      <div class="loreTitleWrap">
+        <span class="loreSigil" aria-hidden="true">✷</span>
+        <h2 class="loreTitle">Articles</h2>
+        <span class="loreSigil" aria-hidden="true">✷</span>
+      </div>
+      <div class="articlesTools">
+        <button class="btn btnGhost btnSm" id="article-search-toggle" type="button" aria-expanded="false" aria-controls="article-search-panel">Search</button>
+      </div>
+    </div>
+
+    <p class="muted small" style="margin: 0;">Long-form writeups from the community.</p>
+
+    <div class="articleSearchPanel" id="article-search-panel" hidden>
+      <div class="articleSearchRow">
+        <label class="srOnly" for="article-search">Search articles</label>
+        <input
+          id="article-search"
+          type="search"
+          autocomplete="off"
+          placeholder="Search articles (title or body)…"
+        />
+        <button class="btn btnGhost btnSm" id="article-search-clear" type="button" disabled>Clear</button>
+      </div>
+      <p class="muted small" id="article-search-meta" style="margin: 8px 0 0;"></p>
+    </div>
+  </div>
+  <div class="postFeed" id="articles"></div>
+</section>
+
+<section aria-live="polite" class="card feedCard">
+  <div class="sectionHead loreBoardHeader">
+    <div class="loreTitleWrap">
+      <span aria-hidden="true" class="loreSigil">✶</span>
+      <h2 class="loreTitle">Lore Board</h2>
+      <span aria-hidden="true" class="loreSigil">✶</span>
+    </div>
+  </div>
+  <div class="postFeed" id="posts"></div>
+</section>
+
+</div>
+</main>
+<script defer="" src="./script.js"></script>
+<script src="./js/app.js" type="module"></script>
+<script src="./js/posts.js" type="module"></script>
+</body>
+</html>
