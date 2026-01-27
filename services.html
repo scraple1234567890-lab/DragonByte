@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="DragonByte Services — Home Wi-Fi, small office networks, Network Binder documentation, training playbooks, and outage recovery plans." />
+    <title>DragonByte — Services</title>
+
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+
+    <style>
+      /* =========================
+         HEADER: force one horizontal row (desktop)
+         ========================= */
+      @media (min-width: 900px) {
+        .siteHeader .brand { min-width: 0; flex: 0 1 auto; }
+        .siteHeader .brandText { min-width: 0; }
+
+        .siteHeader .nav { flex: 1 1 auto; justify-content: flex-end; }
+
+        .siteHeader .navMenu {
+          display: flex !important;
+          flex-wrap: nowrap !important;
+          align-items: center !important;
+          gap: 8px !important;
+          max-width: none !important;
+          white-space: nowrap;
+        }
+
+        .siteHeader .navLink,
+        .siteHeader .navCta {
+          align-items: center;
+          height: 40px;
+        }
+
+        .siteHeader .navLink { padding: 10px 10px; }
+        .siteHeader .navCta { padding: 10px 12px; }
+      }
+
+      /* Services page: if we use the dark homepage background, make the hero readable */
+      .bgHome .pageHero .h1,
+      .bgHome .pageHero .lead,
+      .bgHome .pageHero p,
+      .bgHome .pageHero a {
+        color: rgba(255, 255, 255, 0.92) !important;
+      }
+      .bgHome .pageHero .muted { color: rgba(255, 255, 255, 0.76) !important; }
+
+      .bgHome .pageHero .h1,
+      .bgHome .pageHero p { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35); }
+
+      .bgHome .pageHero .btn.btnGhost {
+        border-color: rgba(255, 255, 255, 0.35) !important;
+        background: rgba(255, 255, 255, 0.10) !important;
+        color: rgba(255, 255, 255, 0.92) !important;
+        backdrop-filter: blur(8px);
+      }
+    </style>
+  </head>
+
+  <body class="bgHome">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="top"></div>
+
+<header class="siteHeader" id="top" role="banner">
+<div class="container headerInner">
+<a aria-label="Go to homepage" class="brand" href="./index.html">
+<span aria-hidden="true" class="brandMark">
+<img alt="" loading="lazy" src="./assets/logo.png"/>
+</span>
+<span class="brandText">
+<span class="brandName">DragonByte</span>
+<span class="brandTag">Network setup • documentation • recovery</span>
+</span>
+</a>
+<nav aria-label="Primary navigation" class="nav">
+<button aria-controls="navMenu" aria-expanded="false" aria-label="Open menu" class="navToggle" type="button">
+<span aria-hidden="true" class="navToggleBars"></span>
+</button>
+<div class="navMenu" id="navMenu">
+<a class="btn btnGhost navCta" href="./articles.html">Articles</a>
+<a class="navLink" href="./services.html">Services</a>
+<a class="navLink" href="./documentation.html">Documentation</a>
+<a class="btn btnPrimary navCta" href="./contact.html">Contact</a>
+<a class="btn btnGhost navCta" data-auth-target="login-cta" href="./login.html">Log in</a>
+<div class="profileMenu" data-default-display="inline-flex" id="profileMenu" style="display: none">
+<button aria-controls="profileMenuList" aria-expanded="false" aria-haspopup="menu" aria-label="Open account menu" class="btn ghost profileTrigger" id="profileMenuToggle" type="button">
+<span class="srOnly">Profile</span>
+<span class="profileAvatar profileAvatar--menu" id="profileAvatar">
+<span aria-hidden="true" class="profileAvatarPlaceholder">
+<svg focusable="false" role="presentation" viewbox="0 0 24 24">
+<path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Zm0 2c-3.33 0-10 1.67-10 5v1h20v-1c0-3.33-6.67-5-10-5Z" fill="currentColor"></path>
+</svg>
+</span>
+<img alt="" loading="lazy"/>
+</span>
+<span aria-hidden="true" class="profileCaret">▾</span>
+</button>
+<div aria-hidden="true" class="profileMenuList" id="profileMenuList" role="menu">
+<a href="./profile.html" role="menuitem">View profile</a>
+<button id="logoutBtn" role="menuitem" type="button">Log out</button>
+</div>
+</div>
+</div>
+</nav>
+</div>
+<div aria-hidden="true" class="headerGlow"></div>
+</header>
+
+    <main id="main">
+      <section class="pageHero section">
+        <div class="container">
+          <div class="pageHeroInner reveal">
+            <h1 class="h1">Services</h1>
+            <p class="lead">
+              Five core offerings, delivered with clear scope, clean implementation, and a calm handoff.
+            </p>
+            <div class="heroCtas">
+              <a class="btn btnPrimary" href="./contact.html#book">Book a Consultation</a>
+              <a class="btn btnGhost" href="./contact.html#quote">Request a Quote</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section sectionAlt">
+        <div class="container">
+          <div class="sectionHead reveal">
+            <h2 class="h2">Detailed breakdown</h2>
+            <p class="muted">What’s included and typical outcomes for each service.</p>
+          </div>
+
+          <div class="serviceDetailGrid">
+            <article class="detailCard reveal" id="home-wifi">
+              <header class="detailHeader">
+                <div class="detailIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22">
+                    <path d="M5 15a7 7 0 0 1 14 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    <path d="M8 15a4 4 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".8"/>
+                    <path d="M12 18h0" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="h3">1) Home Wi-Fi setup/optimization</h3>
+                  <p class="muted">Fix dead zones, improve stability, and reduce “it works sometimes” behavior.</p>
+                </div>
+              </header>
+
+              <div class="detailCols">
+                <div>
+                  <h4 class="h4">What’s included</h4>
+                  <ul class="list">
+                    <li>Wi-Fi signal review + coverage mapping</li>
+                    <li>Router / mesh placement recommendations</li>
+                    <li>Channel, band, and basic security tuning</li>
+                    <li>Device inventory snapshot (key devices)</li>
+                    <li>Validation tests for speed, latency, and stability</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="h4">Typical outcomes</h4>
+                  <ul class="list">
+                    <li>Fewer drops on calls/streams</li>
+                    <li>Better coverage in problem areas</li>
+                    <li>Cleaner settings you can understand</li>
+                    <li>Simple handoff notes for future reference</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="detailCard reveal" id="small-office">
+              <header class="detailHeader">
+                <div class="detailIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22">
+                    <path d="M4 7h16v10H4z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M7 10h10M7 13h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="h3">2) Small office network setup/optimization</h3>
+                  <p class="muted">Reliable networking for printers, POS, VoIP, shared drives, and day-to-day work.</p>
+                </div>
+              </header>
+
+              <div class="detailCols">
+                <div>
+                  <h4 class="h4">What’s included</h4>
+                  <ul class="list">
+                    <li>Network layout review (router/switch/APs)</li>
+                    <li>Basic segmentation as needed (guest vs business)</li>
+                    <li>Wi-Fi performance improvements (roaming, stability)</li>
+                    <li>Critical device validation: POS, printers, VoIP, shared drives</li>
+                    <li>Labeling and cleanup recommendations</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="h4">Typical outcomes</h4>
+                  <ul class="list">
+                    <li>More consistent connectivity</li>
+                    <li>Fewer “printer disappeared” issues</li>
+                    <li>Cleaner separation between guest and business devices</li>
+                    <li>Documentation that reduces dependency on one person</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="detailCard reveal" id="network-binder">
+              <header class="detailHeader">
+                <div class="detailIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22">
+                    <path d="M7 4h10v16H7z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M9 7h6M9 10h6M9 13h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="h3">3) Network design + documentation (“Network Binder”)</h3>
+                  <p class="muted">Design clarity and a binder that makes troubleshooting and onboarding sane.</p>
+                </div>
+              </header>
+
+              <div class="detailCols">
+                <div>
+                  <h4 class="h4">What’s included</h4>
+                  <ul class="list">
+                    <li>High-level network diagram (simple and readable)</li>
+                    <li>Device inventory (model, role, location)</li>
+                    <li>Wi-Fi names/SSIDs (as appropriate) and usage guidance</li>
+                    <li>Support contacts and vendor list</li>
+                    <li>Where access info lives (without exposing secrets)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="h4">Typical outcomes</h4>
+                  <ul class="list">
+                    <li>Less downtime from “unknown setup” problems</li>
+                    <li>Faster support calls (you have the facts ready)</li>
+                    <li>Cleaner handoff when staff changes</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="detailFooter">
+                <a class="btn btnGhost" href="./documentation.html">See deliverables</a>
+              </div>
+            </article>
+
+            <article class="detailCard reveal" id="training-packs">
+              <header class="detailHeader">
+                <div class="detailIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22">
+                    <path d="M8 7h8M8 11h8M8 15h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    <path d="M6 4h12v16H6z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="h3">4) Custom employee training packs (“Company Network Playbook”)</h3>
+                  <p class="muted">Practical guides that match how your business actually operates.</p>
+                </div>
+              </header>
+
+              <div class="detailCols">
+                <div>
+                  <h4 class="h4">What’s included</h4>
+                  <ul class="list">
+                    <li>Role-based quick guides (front desk, manager, etc.)</li>
+                    <li>Common tasks: Wi-Fi, printers, drives, email, VoIP</li>
+                    <li>“If this happens, do this” checklists</li>
+                    <li>Simple escalation paths and who to contact</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="h4">Typical outcomes</h4>
+                  <ul class="list">
+                    <li>Faster onboarding</li>
+                    <li>Fewer interruptions for “basic” questions</li>
+                    <li>More consistent handling of recurring issues</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="detailCard reveal" id="recovery-plan">
+              <header class="detailHeader">
+                <div class="detailIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22">
+                    <path d="M12 2l9 4-9 4-9-4 9-4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                    <path d="M3 10l9 4 9-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                    <path d="M3 14l9 4 9-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" opacity=".85"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="h3">5) Tech Outage Recovery Plan (for their specific tools)</h3>
+                  <p class="muted">
+                    A step-by-step “What to do if X goes down” plan for the tools you rely on.
+                  </p>
+                </div>
+              </header>
+
+              <div class="detailCols">
+                <div>
+                  <h4 class="h4">What’s included</h4>
+                  <ul class="list">
+                    <li>Priority order (what to check first)</li>
+                    <li>Who to call for each scenario</li>
+                    <li>Where access info lives</li>
+                    <li>Fallback options (hotspot, spare device, paper process)</li>
+                    <li>Plans for: ISP/internet, router, Wi-Fi, POS, printers, email (Google/M365), VoIP phones, shared drives, key SaaS apps</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="h4">Typical outcomes</h4>
+                  <ul class="list">
+                    <li>Less panic, faster recovery</li>
+                    <li>Staff follows the same steps consistently</li>
+                    <li>Reduced downtime during outages</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section sectionAlt" id="packages">
+        <div class="container">
+          <div class="sectionHead reveal">
+            <h2 class="h2">Packages</h2>
+            <p class="muted">Choose a tier, then we tailor the scope to your equipment and needs.</p>
+          </div>
+
+          <div class="pricingGrid">
+            <article class="priceCard reveal">
+              <div class="priceTop">
+                <h3 class="h3">Home</h3>
+                <p class="muted">Home Wi-Fi setup/optimization</p>
+              </div>
+              <ul class="list">
+                <li>Coverage + stability improvements</li>
+                <li>Settings optimization</li>
+                <li>Simple handoff notes</li>
+              </ul>
+              <div class="priceBottom">
+                <a class="btn btnPrimary" href="./contact.html#quote">Request a Quote</a>
+              </div>
+            </article>
+
+            <article class="priceCard featured reveal">
+              <div class="badge">Most popular</div>
+              <div class="priceTop">
+                <h3 class="h3">Small Office</h3>
+                <p class="muted">Small office network setup/optimization</p>
+              </div>
+              <ul class="list">
+                <li>Operational reliability improvements</li>
+                <li>Guest vs business basics</li>
+                <li>Core documentation quick binder</li>
+              </ul>
+              <div class="priceBottom">
+                <a class="btn btnPrimary" href="./contact.html#book">Book a Consultation</a>
+              </div>
+            </article>
+
+            <article class="priceCard reveal">
+              <div class="priceTop">
+                <h3 class="h3">Business Essentials</h3>
+                <p class="muted">Network Binder + Playbook + Recovery Plan</p>
+              </div>
+              <ul class="list">
+                <li>Network design + documentation (“Network Binder”)</li>
+                <li>Custom employee training packs (“Company Network Playbook”)</li>
+                <li>Tech Outage Recovery Plan (for their specific tools)</li>
+              </ul>
+              <div class="priceBottom">
+                <a class="btn btnPrimary" href="./contact.html#quote">Request a Quote</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Removed: "Not sure which package fits?" CTA band -->
+        </div>
+      </section>
+    </main>
+
+
+    <footer class="siteFooter siteFooter--home">
+<div class="container footerGrid">
+<div>
+<div class="footerBrand">
+<span aria-hidden="true" class="brandMark">
+<img alt="" decoding="async" height="20" src="./assets/logo.png" width="20"/>
+</span>
+<span class="brandName">DragonByte</span>
+</div>
+<div class="footerContact">
+<p class="muted"><strong>Email:</strong> hello@netopsassist.example</p>
+<p class="muted"><strong>Phone:</strong> (555) 012-3456</p>
+</div>
+</div>
+<div aria-label="Quick links" class="footerLinks">
+<h3 class="h4">Quick links</h3>
+<a href="./services.html">Services</a>
+<a href="./documentation.html">Network Binder</a>
+<a href="./contact.html">Contact</a>
+</div>
+</div>
+<div class="container footerBottom">
+<p class="muted">© <span data-year=""></span> DragonByte. All rights reserved.</p>
+<a class="link" href="#top" id="topLink">Back to top<span aria-hidden="true"> ↑</span></a>
+</div>
+</footer>
+
+
+    <button class="backToTop" type="button" data-back-to-top aria-label="Back to top">
+      <span aria-hidden="true">↑</span>
+    </button>
+
+<script>
+      (function () {
+        const toggle = document.querySelector(".navToggle");
+        const menu = document.getElementById("navMenu");
+        if (!toggle || !menu) return;
+
+        const profileMenu = document.getElementById("profileMenu");
+        const profileToggle = document.getElementById("profileMenuToggle");
+        const profileMenuList = document.getElementById("profileMenuList");
+
+        const setProfileMenuOpen = (open) => {
+          if (!(profileMenu instanceof HTMLElement)) return;
+          profileMenu.classList.toggle("open", open);
+          if (profileToggle) profileToggle.setAttribute("aria-expanded", String(open));
+          if (profileMenuList) profileMenuList.setAttribute("aria-hidden", String(!open));
+        };
+
+        const closeProfileMenu = () => setProfileMenuOpen(false);
+
+        profileToggle?.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const isOpen = profileMenu?.classList.contains("open");
+          setProfileMenuOpen(!isOpen);
+        });
+
+        profileMenuList?.addEventListener("click", (event) => {
+          const target = event.target;
+          if (!(target instanceof HTMLElement)) return;
+          if (target.tagName === "A" || target.tagName === "BUTTON") {
+            closeProfileMenu();
+          }
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!profileMenu?.classList.contains("open")) return;
+          if (!(event.target instanceof Node)) return;
+          if (profileMenu.contains(event.target)) return;
+          closeProfileMenu();
+        });
+
+
+        const closeMenu = () => {
+          menu.classList.remove("isOpen");
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-label", "Open menu");
+          closeProfileMenu();
+        };
+
+        const openMenu = () => {
+          menu.classList.add("isOpen");
+          toggle.setAttribute("aria-expanded", "true");
+          toggle.setAttribute("aria-label", "Close menu");
+        };
+
+        toggle.addEventListener("click", () => {
+          const isOpen = menu.classList.contains("isOpen");
+          if (isOpen) closeMenu();
+          else openMenu();
+        });
+
+        menu.addEventListener("click", (e) => {
+          const a = e.target.closest("a");
+          if (!a) return;
+          if (window.matchMedia("(min-width: 900px)").matches) return;
+          closeMenu();
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeMenu();
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.matchMedia("(min-width: 900px)").matches) closeMenu();
+        });
+      })();
+    </script>
+  
+    <script>
+      (function () {
+        // Set year
+        document.querySelectorAll("[data-year]").forEach((el) => {
+          el.textContent = String(new Date().getFullYear());
+        });
+
+        // Back to top
+        const btt = document.querySelector("[data-back-to-top]");
+        if (btt) {
+          const toggle = () => {
+            const show = window.scrollY > 600;
+            btt.classList.toggle("isVisible", show);
+          };
+          toggle();
+          window.addEventListener("scroll", toggle, { passive: true });
+          btt.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+        }
+
+        // Reveal on scroll
+        const els = Array.from(document.querySelectorAll(".reveal"));
+        if (els.length) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  e.target.classList.add("isVisible");
+                  io.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.12 }
+          );
+          els.forEach((el) => io.observe(el));
+        }
+      })();
+    </script>
+
+      <script src="./js/app.js" type="module"></script>
+
+  </body>
+</html>
