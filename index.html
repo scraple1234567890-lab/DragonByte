@@ -1,333 +1,482 @@
 <!DOCTYPE html>
 
-<html data-theme="dark" lang="en">
+<html data-theme="light" lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="DragonByte — calm, trustworthy network setup, documentation, training, and recovery plans for homes and small offices." name="description"/>
-<title>DragonByte — Network Setup &amp; Documentation</title>
-<link href="./styles.css" rel="stylesheet"/>
-<link href="./assets/favicon.svg" rel="icon" type="image/svg+xml"/>
-<!-- Hero tech background + contrast fixes (no CSS file edits needed) -->
-<style>
-      /*
-        IMPORTANT:
-        Keep the homepage background continuous across sections.
-        The body already has the shared background image + gradient.
-        Section-specific background overlays restart at each section and create a visible seam.
-      */
-      .homePage .hero,
-      .homePage #latest-articles {
-        background: transparent !important;
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="DragonByte — practical articles, runbooks, and recovery checklists for home and small office IT." name="description"/>
+  <title>DragonByte — Articles &amp; Runbooks</title>
+  <link href="./styles.css" rel="stylesheet"/>
+  <link href="./assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+
+  <style>
+    /* =========================
+       HOMEPAGE REDESIGN
+       - Match the rest of the site (light background)
+       - Keep a hero image only in the hero section
+       ========================= */
+
+    /* Override the global “dark home background” rule in styles.css */
+    body.homePage{
+      background-image:
+        radial-gradient(1200px 620px at 15% -10%, rgba(14,165,233,0.18), transparent 60%),
+        radial-gradient(900px 560px at 92% 0%, rgba(124,58,237,0.14), transparent 62%),
+        radial-gradient(900px 520px at 35% 115%, rgba(14,165,233,0.10), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      background-size: auto;
+      background-position: initial;
+      background-attachment: scroll;
+      background-repeat: repeat;
+    }
+
+    /* Hero image, contained */
+    .homeHero{
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(15,23,42,0.10);
+      border-top: 1px solid rgba(15,23,42,0.08);
+    }
+    .homeHero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(2,6,23,0.50), rgba(2,6,23,0.76)),
+        url("./assets/images/index-hero.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: scale(1.02);
+      filter: saturate(0.95) contrast(1.02);
+      pointer-events: none;
+    }
+    .homeHero .container{ position: relative; z-index: 1; }
+
+    /* Hero text contrast */
+    .homeHero .heroCopy,
+    .homeHero .heroCopy p,
+    .homeHero .heroCopy li,
+    .homeHero .heroCopy a,
+    .homeHero .heroCopy h1,
+    .homeHero .heroCopy h2{ color: rgba(255,255,255,0.92); }
+    .homeHero .heroCopy .muted{ color: rgba(255,255,255,0.76); }
+    .homeHero .heroCopy .lead{ color: rgba(255,255,255,0.86); }
+    .homeHero .heroCopy h1,
+    .homeHero .heroCopy p,
+    .homeHero .heroCopy li{ text-shadow: 0 2px 18px rgba(0,0,0,0.35); }
+
+    .homeHero .heroBullets li{ color: rgba(255,255,255,0.84); }
+    .homeHero .bulletIcon{
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.22);
+      color: rgba(255,255,255,0.92);
+      box-shadow: 0 12px 34px rgba(0,0,0,0.25);
+    }
+
+    .homeHero .btn.btnGhost{
+      border-color: rgba(255,255,255,0.30);
+      background: rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 16px 42px rgba(0,0,0,0.22);
+    }
+    .homeHero .btn.btnPrimary{
+      border-color: rgba(14,165,233,0.35);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.30);
+    }
+
+    /* Make mini tiles feel clickable when they're links */
+    .homePage a.miniItem{ transition: transform 180ms var(--ease), background 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease); }
+    .homePage a.miniItem:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.16);
+      box-shadow: 0 18px 52px rgba(0,0,0,0.22);
+    }
+
+    /* =========================
+       HEADER: force one horizontal row (desktop)
+       ========================= */
+    @media (min-width: 900px) {
+      .siteHeader .brand { min-width: 0; flex: 0 1 auto; }
+      .siteHeader .brandText { min-width: 0; }
+
+      .siteHeader .nav { flex: 1 1 auto; justify-content: flex-end; }
+
+      .siteHeader .navMenu {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 8px !important;
+        max-width: none !important;
+        white-space: nowrap;
       }
 
-      .homePage .hero::before,
-      .homePage #latest-articles::before {
-        content: none !important;
-      }
+      .siteHeader .navLink,
+      .siteHeader .navCta { align-items: center; height: 40px; }
 
-      .hero .heroCopy,
-      .hero .heroCopy p,
-      .hero .heroCopy li,
-      .hero .heroCopy a,
-      .hero .heroCopy h1,
-      .hero .heroCopy h2 { color: rgba(255, 255, 255, 0.92) !important; }
-
-      .hero .heroCopy .muted { color: rgba(255, 255, 255, 0.76) !important; }
-      .hero .heroCopy .lead { color: rgba(255, 255, 255, 0.86) !important; }
-
-      .hero .heroCopy h1,
-      .hero .heroCopy p,
-      .hero .heroCopy li { text-shadow: 0 2px 18px rgba(0,0,0,.35); }
-
-      .hero .bulletIcon { color: rgba(255,255,255,0.92) !important; }
-
-      .hero .btn.btnGhost {
-        border-color: rgba(255,255,255,0.35) !important;
-        background: rgba(255,255,255,0.10) !important;
-        color: rgba(255,255,255,0.92) !important;
-        backdrop-filter: blur(8px);
-      }
-
-      .hero .btn.btnPrimary { box-shadow: 0 18px 50px rgba(0,0,0,0.30); }
-
-      /* =========================
-         HEADER: force one horizontal row (desktop)
-         ========================= */
-      @media (min-width: 900px) {
-        .siteHeader .brand { min-width: 0; flex: 0 1 auto; }
-        .siteHeader .brandText { min-width: 0; }
-
-        .siteHeader .nav { flex: 1 1 auto; justify-content: flex-end; }
-
-        .siteHeader .navMenu {
-          display: flex !important;
-          flex-wrap: nowrap !important;
-          align-items: center !important;
-          gap: 8px !important;
-          max-width: none !important;
-          white-space: nowrap;
-        }
-
-        .siteHeader .navLink,
-        .siteHeader .navCta {
-          align-items: center;
-          height: 40px;
-        }
-
-        .siteHeader .navLink { padding: 10px 10px; }
-        .siteHeader .navCta { padding: 10px 12px; }
-      }
-    </style>
+      .siteHeader .navLink { padding: 10px 10px; }
+      .siteHeader .navCta { padding: 10px 12px; }
+    }
+  </style>
 </head>
+
 <body class="homePage">
-<a class="skip-link" href="#main">Skip to content</a>
-<div id="top"></div>
-<header class="siteHeader" id="top" role="banner">
-<div class="container headerInner">
-<a aria-label="Go to homepage" class="brand" href="./index.html">
-<span aria-hidden="true" class="brandMark">
-<img alt="" loading="lazy" src="./assets/logo.png"/>
-</span>
-<span class="brandText">
-<span class="brandName">DragonByte</span>
-<span class="brandTag">Network setup • documentation • recovery</span>
-</span>
-</a>
-<nav aria-label="Primary navigation" class="nav">
-<button aria-controls="navMenu" aria-expanded="false" aria-label="Open menu" class="navToggle" type="button">
-<span aria-hidden="true" class="navToggleBars"></span>
-</button>
-<div class="navMenu" id="navMenu">
-<a class="btn btnGhost navCta" href="./articles.html">Articles</a>
-<a class="btn btnGhost navCta" data-auth-target="login-cta" href="./login.html">Log in</a>
-<div class="profileMenu" data-default-display="inline-flex" id="profileMenu" style="display: none">
-<button aria-controls="profileMenuList" aria-expanded="false" aria-haspopup="menu" aria-label="Open account menu" class="btn ghost profileTrigger" id="profileMenuToggle" type="button">
-<span class="srOnly">Profile</span>
-<span class="profileAvatar profileAvatar--menu" id="profileAvatar">
-<span aria-hidden="true" class="profileAvatarPlaceholder">
-<svg focusable="false" role="presentation" viewbox="0 0 24 24">
-<path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Zm0 2c-3.33 0-10 1.67-10 5v1h20v-1c0-3.33-6.67-5-10-5Z" fill="currentColor"></path>
-</svg>
-</span>
-<img alt="" loading="lazy"/>
-</span>
-<span aria-hidden="true" class="profileCaret">▾</span>
-</button>
-<div aria-hidden="true" class="profileMenuList" id="profileMenuList" role="menu">
-<a href="./profile.html" role="menuitem">View profile</a>
-<button id="logoutBtn" role="menuitem" type="button">Log out</button>
-</div>
-</div>
-</div>
-</nav>
-</div>
-<div aria-hidden="true" class="headerGlow"></div>
-</header>
-<main id="main">
-<section class="hero section">
-<div class="container heroGrid">
-<div class="heroCopy reveal">
-<h1 class="h1">Articles, Documentation, IT made simple</h1>
-<p class="lead">
-              DragonByte designs, optimizes, and documents your network. Provides a wide variety of IT services for Home and Small Office/Enterprise networks.
-            </p>
-</div>
-<div aria-label="Service snapshot" class="heroCard reveal">
-<div class="glassCard">
-<div class="glassHeader">
-<h2 class="h3">What we do</h2>
-</div>
-<div class="miniGrid">
-<div class="miniItem">
-<span aria-hidden="true" class="miniIcon">
-<svg height="18" viewbox="0 0 24 24" width="18">
-<path d="M5 15a7 7 0 0 1 14 0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
-<path d="M8 15a4 4 0 0 1 8 0" fill="none" opacity=".8" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
-<path d="M12 18h0" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
-</svg>
-</span>
-<span>Network setup &amp; stability</span>
-</div>
-<div class="miniItem">
-<span aria-hidden="true" class="miniIcon">
-<svg height="18" viewbox="0 0 24 24" width="18">
-<path d="M4 7h16v10H4z" fill="none" stroke="currentColor" stroke-width="1.8"></path>
-<path d="M7 10h4M7 13h7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
-</svg>
-</span>
-<span>Network Binder docs</span>
-</div>
-<div class="miniItem">
-<span aria-hidden="true" class="miniIcon">
-<svg height="18" viewbox="0 0 24 24" width="18">
-<path d="M7 7h10v14H7z" fill="none" stroke="currentColor" stroke-width="1.8"></path>
-<path d="M9 10h6M9 13h6M9 16h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
-<path d="M7 7l2-3h6l2 3" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"></path>
-</svg>
-</span>
-<span>Employee playbooks</span>
-</div>
-<div class="miniItem">
-<span aria-hidden="true" class="miniIcon">
-<svg height="18" viewbox="0 0 24 24" width="18">
-<path d="M12 2l9 5-9 5-9-5 9-5Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"></path>
-<path d="M3 7v10l9 5 9-5V7" fill="none" opacity=".85" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"></path>
-</svg>
-</span>
-<span>Outage recovery plans</span>
-</div>
-</div>
-<div class="divider"></div>
-<div class="glassFooter">
-</div>
-</div>
-<div aria-hidden="true" class="heroBackdrop"></div>
-</div>
-</div>
-</section><section class="section" id="latest-articles"><div class="container"><div class="homeArticlesHeader"><h2 class="h2">Latest articles</h2><div class="homeArticlesActions"><a class="btn btnGhost" href="./articles.html">View all</a></div></div><div class="postFeed" id="homeArticles"><p class="muted">Loading latest articles...</p></div></div></section>
-</main>
-<footer class="siteFooter siteFooter--home">
-<div class="container footerGrid">
-<div>
-<div class="footerBrand">
-<span aria-hidden="true" class="brandMark">
-<img alt="" decoding="async" height="20" src="./assets/logo.png" width="20"/>
-</span>
-<span class="brandName">DragonByte</span>
-</div>
-<div class="footerContact">
-<p class="muted"><strong>Email:</strong> hello@netopsassist.example</p>
-<p class="muted"><strong>Phone:</strong> (555) 012-3456</p>
-</div>
-</div>
-<div aria-label="Quick links" class="footerLinks">
-<h3 class="h4">Quick links</h3>
-<a href="./index.html">Home</a>
-<a href="./articles.html">Articles</a>
-<a href="./login.html">Log in</a>
-</div>
-</div>
-<div class="container footerBottom">
-<p class="muted">© <span data-year=""></span> DragonByte. All rights reserved.</p>
-<a class="link" href="#top" id="topLink">Back to top<span aria-hidden="true"> ↑</span></a>
-</div>
-</footer>
-<button aria-label="Back to top" class="backToTop" data-back-to-top="" type="button">
-<span aria-hidden="true">↑</span>
-</button>
-<script>
-      (function () {
-        const toggle = document.querySelector(".navToggle");
-        const menu = document.getElementById("navMenu");
-        if (!toggle || !menu) return;
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="top"></div>
 
-        const profileMenu = document.getElementById("profileMenu");
-        const profileToggle = document.getElementById("profileMenuToggle");
-        const profileMenuList = document.getElementById("profileMenuList");
+  <header class="siteHeader" id="top" role="banner">
+    <div class="container headerInner">
+      <a aria-label="Go to homepage" class="brand" href="./index.html">
+        <span aria-hidden="true" class="brandMark">
+          <img alt="" loading="lazy" src="./assets/logo.png"/>
+        </span>
+        <span class="brandText">
+          <span class="brandName">DragonByte</span>
+          <span class="brandTag">Network setup • documentation • recovery</span>
+        </span>
+      </a>
 
-        const setProfileMenuOpen = (open) => {
-          if (!(profileMenu instanceof HTMLElement)) return;
-          profileMenu.classList.toggle("open", open);
-          if (profileToggle) profileToggle.setAttribute("aria-expanded", String(open));
-          if (profileMenuList) profileMenuList.setAttribute("aria-hidden", String(!open));
-        };
+      <nav aria-label="Primary navigation" class="nav">
+        <button aria-controls="navMenu" aria-expanded="false" aria-label="Open menu" class="navToggle" type="button">
+          <span aria-hidden="true" class="navToggleBars"></span>
+        </button>
+        <div class="navMenu" id="navMenu">
+          <a class="btn btnGhost navCta" href="./articles.html">Articles</a>
+          <a class="btn btnGhost navCta" data-auth-target="login-cta" href="./login.html">Log in</a>
 
-        const closeProfileMenu = () => setProfileMenuOpen(false);
+          <div class="profileMenu" data-default-display="inline-flex" id="profileMenu" style="display: none">
+            <button aria-controls="profileMenuList" aria-expanded="false" aria-haspopup="menu" aria-label="Open account menu" class="btn ghost profileTrigger" id="profileMenuToggle" type="button">
+              <span class="srOnly">Profile</span>
+              <span class="profileAvatar profileAvatar--menu" id="profileAvatar">
+                <span aria-hidden="true" class="profileAvatarPlaceholder">
+                  <svg focusable="false" role="presentation" viewBox="0 0 24 24">
+                    <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Zm0 2c-3.33 0-10 1.67-10 5v1h20v-1c0-3.33-6.67-5-10-5Z" fill="currentColor"></path>
+                  </svg>
+                </span>
+                <img alt="" loading="lazy"/>
+              </span>
+              <span aria-hidden="true" class="profileCaret">▾</span>
+            </button>
+            <div aria-hidden="true" class="profileMenuList" id="profileMenuList" role="menu">
+              <a href="./profile.html" role="menuitem">View profile</a>
+              <button id="logoutBtn" role="menuitem" type="button">Log out</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div aria-hidden="true" class="headerGlow"></div>
+  </header>
 
-        profileToggle?.addEventListener("click", (event) => {
-          event.stopPropagation();
-          const isOpen = profileMenu?.classList.contains("open");
-          setProfileMenuOpen(!isOpen);
-        });
+  <main id="main">
+    <section class="hero section homeHero">
+      <div class="container heroGrid">
+        <div class="heroCopy reveal">
+          <p class="eyebrow">
+            <span class="pill">Articles</span>
+            <span class="pill">Runbooks</span>
+            <span class="pill">Checklists</span>
+          </p>
 
-        profileMenuList?.addEventListener("click", (event) => {
-          const target = event.target;
-          if (!(target instanceof HTMLElement)) return;
-          if (target.tagName === "A" || target.tagName === "BUTTON") {
-            closeProfileMenu();
-          }
-        });
+          <h1 class="h1">DragonByte, distilled</h1>
+          <p class="lead">
+            A small, growing library of practical network setup notes, documentation templates, and outage recovery checklists.
+            Browse the latest articles, or sign in to publish your own.
+          </p>
 
-        document.addEventListener("click", (event) => {
-          if (!profileMenu?.classList.contains("open")) return;
-          if (!(event.target instanceof Node)) return;
-          if (profileMenu.contains(event.target)) return;
+          <div class="heroCtas">
+            <a class="btn btnPrimary" href="./articles.html">Browse Articles</a>
+            <a class="btn btnGhost" data-auth-target="login-cta" href="./portal.html">Create account</a>
+            <a class="btn btnGhost" data-auth-target="login-cta" href="./login.html">Log in</a>
+          </div>
+
+          <ul class="heroBullets">
+            <li>
+              <span aria-hidden="true" class="bulletIcon">🔎</span>
+              <span><strong>Search + tags:</strong> Find guides fast on the Articles page.</span>
+            </li>
+            <li>
+              <span aria-hidden="true" class="bulletIcon">✍️</span>
+              <span><strong>Publish:</strong> Logged-in users can write long-form articles.</span>
+            </li>
+            <li>
+              <span aria-hidden="true" class="bulletIcon">👤</span>
+              <span><strong>Profile:</strong> Set a display name + avatar for authorship.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div aria-label="Quick actions" class="heroCard reveal">
+          <div class="glassCard">
+            <div class="glassHeader">
+              <h2 class="h3">Start here</h2>
+              <p class="muted small">Shortcuts to the main parts of the site.</p>
+            </div>
+
+            <div class="miniGrid">
+              <a class="miniItem" href="./articles.html">
+                <span aria-hidden="true" class="miniIcon">
+                  <svg width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M7 7h10v14H7z" fill="none" stroke="currentColor" stroke-width="1.8"></path>
+                    <path d="M9 10h6M9 13h6M9 16h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+                    <path d="M7 7l2-3h6l2 3" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"></path>
+                  </svg>
+                </span>
+                <span>Browse articles</span>
+              </a>
+
+              <a class="miniItem" href="./articles.html">
+                <span aria-hidden="true" class="miniIcon">
+                  <svg width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M10 18a8 8 0 1 1 5.29-14.06A8 8 0 0 1 10 18Z" fill="none" stroke="currentColor" stroke-width="1.8"></path>
+                    <path d="M21 21l-4.3-4.3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+                  </svg>
+                </span>
+                <span>Search + quick tags</span>
+              </a>
+
+              <a class="miniItem" data-auth-target="login-cta" href="./login.html">
+                <span aria-hidden="true" class="miniIcon">
+                  <svg width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M10 17l5-5-5-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+                    <path d="M15 12H3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+                    <path d="M21 3v18" fill="none" opacity=".75" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+                  </svg>
+                </span>
+                <span>Log in</span>
+              </a>
+
+              <a class="miniItem" data-auth-target="login-cta" href="./portal.html">
+                <span aria-hidden="true" class="miniIcon">
+                  <svg width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Z" fill="none" stroke="currentColor" stroke-width="1.8"></path>
+                    <path d="M2 21c0-4 6-6 10-6s10 2 10 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+                  </svg>
+                </span>
+                <span>Create an account</span>
+              </a>
+
+              <a class="miniItem" href="./profile.html">
+                <span aria-hidden="true" class="miniIcon">
+                  <svg width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Z" fill="none" stroke="currentColor" stroke-width="1.8"></path>
+                    <path d="M4 22c1.8-4.2 6.1-6 8-6s6.2 1.8 8 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+                  </svg>
+                </span>
+                <span>Your profile</span>
+              </a>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="glassFooter">
+              <a class="btn btnGhost btnSm" href="./articles.html">Latest updates</a>
+              <a class="btn btnGhost btnSm" href="./profile.html">Account settings</a>
+            </div>
+          </div>
+          <div aria-hidden="true" class="heroBackdrop"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="site-overview">
+      <div class="container">
+        <div class="sectionHead">
+          <h2 class="h2">What’s here right now</h2>
+          <p class="muted">
+            DragonByte is intentionally simple: an article library with search + tags, plus an account/profile system for authors.
+          </p>
+        </div>
+
+        <div class="cardGrid">
+          <div class="card">
+            <div class="cardIcon" aria-hidden="true">🗂️</div>
+            <h3 class="h3">Articles</h3>
+            <p class="muted">Long-form guides, runbooks, and checklists you can actually use.</p>
+            <a class="link" href="./articles.html">Browse Articles <span aria-hidden="true">→</span></a>
+          </div>
+
+          <div class="card">
+            <div class="cardIcon" aria-hidden="true">🏷️</div>
+            <h3 class="h3">Search + tags</h3>
+            <p class="muted">Find what you need fast with keyword search and quick tag chips.</p>
+            <a class="link" href="./articles.html">Open search <span aria-hidden="true">→</span></a>
+          </div>
+
+          <div class="card">
+            <div class="cardIcon" aria-hidden="true">👤</div>
+            <h3 class="h3">Accounts</h3>
+            <p class="muted">Log in to publish articles and personalize your author profile.</p>
+            <a class="link" href="./profile.html">View profile <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="latest-articles">
+      <div class="container">
+        <div class="homeArticlesHeader">
+          <h2 class="h2">Latest articles</h2>
+          <div class="homeArticlesActions">
+            <a class="btn btnGhost" href="./articles.html">View all</a>
+          </div>
+        </div>
+        <div class="postFeed" id="homeArticles">
+          <p class="muted">Loading latest articles...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="siteFooter siteFooter--home">
+    <div class="container footerGrid">
+      <div>
+        <div class="footerBrand">
+          <span aria-hidden="true" class="brandMark">
+            <img alt="" decoding="async" height="20" src="./assets/logo.png" width="20"/>
+          </span>
+          <span class="brandName">DragonByte</span>
+        </div>
+        <div class="footerContact">
+          <p class="muted"><strong>Email:</strong> hello@netopsassist.example</p>
+          <p class="muted"><strong>Phone:</strong> (555) 012-3456</p>
+        </div>
+      </div>
+
+      <div aria-label="Quick links" class="footerLinks">
+        <h3 class="h4">Quick links</h3>
+        <a href="./index.html">Home</a>
+        <a href="./articles.html">Articles</a>
+        <a href="./login.html">Log in</a>
+      </div>
+    </div>
+
+    <div class="container footerBottom">
+      <p class="muted">© <span data-year=""></span> DragonByte. All rights reserved.</p>
+      <a class="link" href="#top" id="topLink">Back to top<span aria-hidden="true"> ↑</span></a>
+    </div>
+  </footer>
+
+  <button aria-label="Back to top" class="backToTop" data-back-to-top="" type="button">
+    <span aria-hidden="true">↑</span>
+  </button>
+
+  <script>
+    (function () {
+      const toggle = document.querySelector(".navToggle");
+      const menu = document.getElementById("navMenu");
+      if (!toggle || !menu) return;
+
+      const profileMenu = document.getElementById("profileMenu");
+      const profileToggle = document.getElementById("profileMenuToggle");
+      const profileMenuList = document.getElementById("profileMenuList");
+
+      const setProfileMenuOpen = (open) => {
+        if (!(profileMenu instanceof HTMLElement)) return;
+        profileMenu.classList.toggle("open", open);
+        if (profileToggle) profileToggle.setAttribute("aria-expanded", String(open));
+        if (profileMenuList) profileMenuList.setAttribute("aria-hidden", String(!open));
+      };
+
+      const closeProfileMenu = () => setProfileMenuOpen(false);
+
+      profileToggle?.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const isOpen = profileMenu?.classList.contains("open");
+        setProfileMenuOpen(!isOpen);
+      });
+
+      profileMenuList?.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLElement)) return;
+        if (target.tagName === "A" || target.tagName === "BUTTON") {
           closeProfileMenu();
-        });
-
-        const closeMenu = () => {
-          menu.classList.remove("isOpen");
-          toggle.setAttribute("aria-expanded", "false");
-          toggle.setAttribute("aria-label", "Open menu");
-          closeProfileMenu();
-        };
-
-        const openMenu = () => {
-          menu.classList.add("isOpen");
-          toggle.setAttribute("aria-expanded", "true");
-          toggle.setAttribute("aria-label", "Close menu");
-        };
-
-        toggle.addEventListener("click", () => {
-          const isOpen = menu.classList.contains("isOpen");
-          if (isOpen) closeMenu();
-          else openMenu();
-        });
-
-        menu.addEventListener("click", (e) => {
-          const a = e.target.closest("a");
-          if (!a) return;
-          if (window.matchMedia("(min-width: 900px)").matches) return;
-          closeMenu();
-        });
-
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") closeMenu();
-        });
-
-        window.addEventListener("resize", () => {
-          if (window.matchMedia("(min-width: 900px)").matches) closeMenu();
-        });
-      })();
-    </script>
-<script>
-      (function () {
-        // Set year
-        document.querySelectorAll("[data-year]").forEach((el) => {
-          el.textContent = String(new Date().getFullYear());
-        });
-
-        // Back to top
-        const btt = document.querySelector("[data-back-to-top]");
-        if (btt) {
-          const toggle = () => {
-            const show = window.scrollY > 600;
-            btt.classList.toggle("isVisible", show);
-          };
-          toggle();
-          window.addEventListener("scroll", toggle, { passive: true });
-          btt.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
         }
+      });
 
-        // Reveal on scroll
-        const els = Array.from(document.querySelectorAll(".reveal"));
-        if (els.length) {
-          const io = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((e) => {
-                if (e.isIntersecting) {
-                  e.target.classList.add("isVisible");
-                  io.unobserve(e.target);
-                }
-              });
-            },
-            { threshold: 0.12 }
-          );
-          els.forEach((el) => io.observe(el));
-        }
-      })();
-    </script>
-<script src="./js/app.js" type="module"></script><script src="./js/home-articles.js" type="module"></script>
+      document.addEventListener("click", (event) => {
+        if (!profileMenu?.classList.contains("open")) return;
+        if (!(event.target instanceof Node)) return;
+        if (profileMenu.contains(event.target)) return;
+        closeProfileMenu();
+      });
+
+      const closeMenu = () => {
+        menu.classList.remove("isOpen");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open menu");
+        closeProfileMenu();
+      };
+
+      const openMenu = () => {
+        menu.classList.add("isOpen");
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.setAttribute("aria-label", "Close menu");
+      };
+
+      toggle.addEventListener("click", () => {
+        const isOpen = menu.classList.contains("isOpen");
+        if (isOpen) closeMenu();
+        else openMenu();
+      });
+
+      menu.addEventListener("click", (e) => {
+        const a = e.target.closest("a");
+        if (!a) return;
+        if (window.matchMedia("(min-width: 900px)").matches) return;
+        closeMenu();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.matchMedia("(min-width: 900px)").matches) closeMenu();
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      // Set year
+      document.querySelectorAll("[data-year]").forEach((el) => {
+        el.textContent = String(new Date().getFullYear());
+      });
+
+      // Back to top
+      const btt = document.querySelector("[data-back-to-top]");
+      if (btt) {
+        const toggle = () => {
+          const show = window.scrollY > 600;
+          btt.classList.toggle("isVisible", show);
+        };
+        toggle();
+        window.addEventListener("scroll", toggle, { passive: true });
+        btt.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+      }
+
+      // Reveal on scroll
+      const els = Array.from(document.querySelectorAll(".reveal"));
+      if (els.length) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("isVisible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    })();
+  </script>
+
+  <script src="./js/app.js" type="module"></script>
+  <script src="./js/home-articles.js" type="module"></script>
 </body>
 </html>
