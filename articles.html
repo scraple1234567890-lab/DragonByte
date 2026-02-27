@@ -7,8 +7,6 @@
 <title>StarSpell Academy | Articles</title>
 <link href="./styles.css" rel="stylesheet"/>
 
-
-
     <style>
       /* =========================
          HEADER: force one horizontal row (desktop)
@@ -40,7 +38,7 @@
     </style>
 
   </head>
-<body class="postsPage page-articles">
+<body class="page-articles">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="siteHeader" id="top" role="banner">
@@ -59,10 +57,7 @@
 <span aria-hidden="true" class="navToggleBars"></span>
 </button>
 <div class="navMenu" id="navMenu">
-<a class="navLink" href="./index.html">Home</a>
 <a class="btn btnGhost navCta" href="./articles.html">Articles</a>
-<a class="navLink" href="./posts.html">Posts</a>
-<a class="btn btnPrimary navCta" href="./quiz.html">Quiz</a>
 <a class="btn btnGhost navCta" data-auth-target="login-cta" href="./login.html">Log in</a>
 <div class="profileMenu" data-default-display="inline-flex" id="profileMenu" style="display: none">
 <button aria-controls="profileMenuList" aria-expanded="false" aria-haspopup="menu" aria-label="Open account menu" class="btn ghost profileTrigger" id="profileMenuToggle" type="button">
@@ -103,7 +98,6 @@
       autocomplete="off"
       placeholder="e.g., networking, backup, windows"
     />
-
 
     <label class="srOnly" for="article-editor">Article</label>
 
@@ -180,7 +174,6 @@
     <!-- Hidden field used for saving sanitized HTML to Supabase -->
     <textarea id="article-content" name="content" maxlength="200000" hidden></textarea>
 
-
     <label class="muted small" for="article-image">Cover image (optional)</label>
     <input id="article-image" name="image" type="file" accept="image/*" />
 	    <p class="muted small" id="article-image-help" hidden style="margin: -6px 0 0;"></p>
@@ -234,42 +227,6 @@
   </div>
   <div class="postFeed" id="articles"></div>
 </section>
-
-<section aria-live="polite" class="card feedCard">
-  <div class="sectionHead loreBoardHeader">
-    <div class="articlesTopRow">
-      <div class="loreTitleWrap">
-        <span aria-hidden="true" class="loreSigil">✶</span>
-        <h2 class="loreTitle">Lore Board</h2>
-        <span aria-hidden="true" class="loreSigil">✶</span>
-      </div>
-      <div class="articlesTools">
-        <button aria-expanded="false" class="btn heroCta magentaGlow btnSm" id="share-post-btn" type="button">Share a post</button>
-      </div>
-    </div>
-  </div>
-
-  <section class="card" hidden id="composer-card">
-    <div class="postComposerHeader">
-      <div>
-        <p class="kicker">Share a post</p>
-        <p class="muted small">Write a short note for the Lore Board. (2000 characters max)</p>
-      </div>
-      <button class="btn ghost" id="close-composer" type="button">Close</button>
-    </div>
-    <form class="postForm" id="new-post-form">
-      <label class="muted small" for="post-content">What would you like to share?</label>
-      <textarea id="post-content" maxlength="2000" name="content" required rows="4"></textarea>
-      <div class="actions">
-        <button class="btn primary" id="post-submit" type="submit">Post</button>
-      </div>
-      <p aria-live="polite" class="muted small" id="post-status"></p>
-    </form>
-  </section>
-
-  <div class="postFeed" id="posts"></div>
-</section>
-
 </div>
 </main>
 
@@ -291,9 +248,11 @@
 <h3 class="h4">Quick links</h3>
 <a href="./index.html">Home</a>
 <a href="./articles.html">Articles</a>
-<a href="./posts.html">Posts</a>
-<a href="./quiz.html">Quiz</a>
 <a href="./login.html">Log in</a>
+</div>
+</div>
+<div class="container footerBottom">
+<p class="muted">© <span data-year=""></span> DragonByte. All rights reserved.</p>
 <a class="link" href="#top" id="topLink">Back to top<span aria-hidden="true"> ↑</span></a>
 </div>
 </footer>
@@ -301,6 +260,6 @@
 <button aria-label="Back to top" class="backToTop" data-back-to-top type="button"><span aria-hidden="true">↑</span></button>
 <script defer="" src="./script.js"></script>
 <script src="./js/app.js" type="module"></script>
-<script src="./js/posts.js" type="module"></script>
+<script src="./js/articles.js" type="module"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="StarSpell Academy — log in to your account to view the Lore Board." />
+    <meta name="description" content="DragonByte — log in to manage your account and view the latest articles." />
     <title>StarSpell Academy — Login</title>
     <link rel="stylesheet" href="./styles.css" />
   
@@ -59,10 +59,7 @@
 <span aria-hidden="true" class="navToggleBars"></span>
 </button>
 <div class="navMenu" id="navMenu">
-<a class="navLink" href="./index.html">Home</a>
 <a class="btn btnGhost navCta" href="./articles.html">Articles</a>
-<a class="navLink" href="./posts.html">Posts</a>
-<a class="btn btnPrimary navCta" href="./quiz.html">Quiz</a>
 <a class="btn btnGhost navCta" data-auth-target="login-cta" href="./login.html">Log in</a>
 <div class="profileMenu" data-default-display="inline-flex" id="profileMenu" style="display: none">
 <button aria-controls="profileMenuList" aria-expanded="false" aria-haspopup="menu" aria-label="Open account menu" class="btn ghost profileTrigger" id="profileMenuToggle" type="button">
@@ -93,7 +90,7 @@
         <div class="container authGrid">
           <div class="card">
             <h3>Log in</h3>
-            <p class="muted">Return to your StarSpell account to see the latest Lore Board notes.</p>
+            <p class="muted">Log in to your account to manage your profile and read the latest articles.</p>
             <form id="loginForm">
               <div class="field">
                 <label for="loginEmail">Email</label>
@@ -115,7 +112,7 @@
           <div class="card" id="authSuccessMessage" style="display: none">
             <h3>Login successful</h3>
             <p class="muted">
-              You’re signed in as <span data-auth-email>your account</span>. Head to Articles to share a note or refresh to stay in sync.
+              You’re signed in as <span data-auth-email>your account</span>. Head to Articles to browse the latest updates.
             </p>
             <div class="actions">
               <a class="btn primary" href="./articles.html">Go to Articles</a>
@@ -124,39 +121,6 @@
 
           <div class="actions" style="grid-column: 1 / -1; display: flex; gap: 10px; flex-wrap: wrap;">
             <p id="authStatus" class="muted small" aria-live="polite" style="flex: 1 1 auto">Checking your session...</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section alt">
-        <div class="container">
-          <div class="sectionHead">
-            <p class="kicker">Lore Board</p>
-            <h2>Recent shared posts</h2>
-            <p class="muted">Browse the latest notes and add your own once signed in.</p>
-          </div>
-          <div class="postGrid">
-            <article class="card" id="postComposerCard">
-              <h3>Share a post</h3>
-              <p class="muted small" id="postGuestNotice">Log in to post a note to the board.</p>
-              <form id="postForm" class="postForm" style="display: none">
-                <label class="field">
-                  <span>Your post</span>
-                  <textarea id="postBody" name="body" rows="4" maxlength="2000" required placeholder="What do you want to share?"></textarea>
-                </label>
-                <p id="postError" class="error small" aria-live="polite"></p>
-                <div class="actions">
-                  <button class="btn primary" type="submit">Post</button>
-                </div>
-                <p id="postStatus" class="muted small" aria-live="polite"></p>
-              </form>
-            </article>
-
-            <div>
-              <div class="postFeed" id="supabaseFeed" aria-live="polite">
-                <p class="muted">Loading posts...</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -180,13 +144,14 @@
 <h3 class="h4">Quick links</h3>
 <a href="./index.html">Home</a>
 <a href="./articles.html">Articles</a>
-<a href="./posts.html">Posts</a>
-<a href="./quiz.html">Quiz</a>
 <a href="./login.html">Log in</a>
+</div>
+</div>
+<div class="container footerBottom">
+<p class="muted">© <span data-year=""></span> DragonByte. All rights reserved.</p>
 <a class="link" href="#top" id="topLink">Back to top<span aria-hidden="true"> ↑</span></a>
 </div>
 </footer>
-
 
     
 <button aria-label="Back to top" class="backToTop" data-back-to-top type="button"><span aria-hidden="true">↑</span></button>

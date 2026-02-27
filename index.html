@@ -99,10 +99,7 @@
 <span aria-hidden="true" class="navToggleBars"></span>
 </button>
 <div class="navMenu" id="navMenu">
-<a class="navLink" href="./index.html">Home</a>
 <a class="btn btnGhost navCta" href="./articles.html">Articles</a>
-<a class="navLink" href="./posts.html">Posts</a>
-<a class="btn btnPrimary navCta" href="./quiz.html">Quiz</a>
 <a class="btn btnGhost navCta" data-auth-target="login-cta" href="./login.html">Log in</a>
 <div class="profileMenu" data-default-display="inline-flex" id="profileMenu" style="display: none">
 <button aria-controls="profileMenuList" aria-expanded="false" aria-haspopup="menu" aria-label="Open account menu" class="btn ghost profileTrigger" id="profileMenuToggle" type="button">
@@ -183,8 +180,6 @@
 </div>
 <div class="divider"></div>
 <div class="glassFooter">
-<a class="btn btnPrimary btnSm" href="./articles.html">Browse Articles</a>
-<a class="btn btnGhost btnSm" href="./quiz.html">Take the Quiz</a>
 </div>
 </div>
 <div aria-hidden="true" class="heroBackdrop"></div>
@@ -210,9 +205,11 @@
 <h3 class="h4">Quick links</h3>
 <a href="./index.html">Home</a>
 <a href="./articles.html">Articles</a>
-<a href="./posts.html">Posts</a>
-<a href="./quiz.html">Quiz</a>
 <a href="./login.html">Log in</a>
+</div>
+</div>
+<div class="container footerBottom">
+<p class="muted">© <span data-year=""></span> DragonByte. All rights reserved.</p>
 <a class="link" href="#top" id="topLink">Back to top<span aria-hidden="true"> ↑</span></a>
 </div>
 </footer>
@@ -258,7 +255,6 @@
           if (profileMenu.contains(event.target)) return;
           closeProfileMenu();
         });
-
 
         const closeMenu = () => {
           menu.classList.remove("isOpen");
