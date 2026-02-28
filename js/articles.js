@@ -1,4 +1,5 @@
 import { supabase } from "./supabaseClient.js";
+import { ARTICLE_ADMIN_EMAIL, ARTICLE_ADMIN_USER_ID } from "./config.js";
 
 const postForm = document.getElementById("new-post-form");
 const postContentInput = document.getElementById("post-content");
@@ -71,6 +72,21 @@ const TARGET_IMAGE_BYTES = 1200 * 1024; // ~1.2MB target
 const MAX_OPTIMIZED_IMAGE_BYTES = 1800 * 1024; // ~1.8MB hard-ish ceiling
 
 let currentUser = null;
+
+// =========================
+// Article publishing permissions
+// =========================
+const ADMIN_EMAIL = String(ARTICLE_ADMIN_EMAIL || "").trim().toLowerCase();
+const ADMIN_USER_ID = String(ARTICLE_ADMIN_USER_ID || "").trim();
+const ARTICLE_ADMIN_CONFIGURED = Boolean(ADMIN_EMAIL || ADMIN_USER_ID);
+
+function isArticleAdmin(user) {
+  if (!ARTICLE_ADMIN_CONFIGURED) return false;
+  if (!user) return false;
+  if (ADMIN_USER_ID && user.id === ADMIN_USER_ID) return true;
+  const email = String(user.email || "").trim().toLowerCase();
+  return Boolean(ADMIN_EMAIL && email && email === ADMIN_EMAIL);
+}
 
 /* =========================
    Tab key support in editors
@@ -304,28 +320,47 @@ function closeComposer(card, button) {
 }
 
 function toggleCreateUI(isLoggedIn) {
+  const isAdmin = isLoggedIn && isArticleAdmin(currentUser);
+
   // Show/hide forms, keep feeds visible for everyone
   if (postForm) {
     postForm.style.display = isLoggedIn ? "grid" : "none";
   }
   if (articleForm) {
-    articleForm.style.display = isLoggedIn ? "grid" : "none";
+    articleForm.style.display = isAdmin ? "grid" : "none";
   }
 
-  if (mustLogin) {
-    mustLogin.style.display = isLoggedIn ? "none" : "block";
-    if (!mustLogin.dataset.defaultText) {
-      mustLogin.dataset.defaultText = mustLogin.textContent || "You must be logged in to post.";
-    }
-    mustLogin.textContent = isLoggedIn ? "" : mustLogin.dataset.defaultText;
-  }
-
+  // Share buttons
   setShareButtonEnabled(sharePostButton, isLoggedIn);
-  setShareButtonEnabled(shareArticleButton, isLoggedIn);
+  setShareButtonEnabled(shareArticleButton, isAdmin);
 
+  // Messaging
+  if (mustLogin) {
+    if (!mustLogin.dataset.defaultText) {
+      mustLogin.dataset.defaultText = mustLogin.textContent || "";
+    }
+
+    if (!isLoggedIn) {
+      mustLogin.style.display = "block";
+      mustLogin.textContent = "Log in to access account features. (Only the site owner can publish articles.)";
+    } else if (!ARTICLE_ADMIN_CONFIGURED) {
+      mustLogin.style.display = "block";
+      mustLogin.textContent = "Publishing is locked until the site owner sets ARTICLE_ADMIN_EMAIL or ARTICLE_ADMIN_USER_ID in js/config.js.";
+    } else if (!isAdmin) {
+      mustLogin.style.display = "block";
+      mustLogin.textContent = "You’re logged in, but only the site owner can publish articles.";
+    } else {
+      mustLogin.style.display = "none";
+      mustLogin.textContent = "";
+    }
+  }
+
+  // Always close composer if the user can't publish
+  if (!isAdmin) {
+    closeComposer(articleComposerCard, shareArticleButton);
+  }
   if (!isLoggedIn) {
     closeComposer(postComposerCard, sharePostButton);
-    closeComposer(articleComposerCard, shareArticleButton);
   }
 }
 
@@ -2537,6 +2572,14 @@ async function handleArticleSubmit(event) {
 
   if (!currentUser) {
     setStatus(articleStatus, "Please log in to publish an article.", "error");
+    return;
+  }
+
+  if (!isArticleAdmin(currentUser)) {
+    const msg = ARTICLE_ADMIN_CONFIGURED
+      ? "Only the site owner can publish or edit articles."
+      : "Publishing is locked until the site owner sets ARTICLE_ADMIN_EMAIL or ARTICLE_ADMIN_USER_ID in js/config.js.";
+    setStatus(articleStatus, msg, "error");
     return;
   }
 
