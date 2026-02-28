@@ -55,6 +55,9 @@
       border: 0;
     }
 
+
+    /* Solo hero layout (no right-side card) */
+    .homeHero .heroGrid{ grid-template-columns: 1fr !important; }
 /* Hero text contrast */
     .homeHero .heroCopy,
     .homeHero .heroCopy p,
@@ -177,13 +180,7 @@
 <section class="hero section homeHero">
       <div class="container heroGrid">
         <div class="heroCopy reveal">
-          <p class="eyebrow">
-            <span class="pill">Articles</span>
-            <span class="pill">Runbooks</span>
-            <span class="pill">Checklists</span>
-          </p>
-
-          <h1 class="h1">DragonByte, distilled</h1>
+<h1 class="h1">DragonByte, distilled</h1>
           <p class="lead">
             A small, growing library of practical network setup notes, documentation templates, and outage recovery checklists.
             Browse the latest articles, or sign in to manage your profile.
@@ -194,94 +191,9 @@
             <a class="btn btnGhost" data-auth-target="login-cta" href="./portal.html">Create account</a>
             <a class="btn btnGhost" data-auth-target="login-cta" href="./login.html">Log in</a>
           </div>
+</div>
 
-          <ul class="heroBullets">
-            <li>
-              <span aria-hidden="true" class="bulletIcon">🔎</span>
-              <span><strong>Search + tags:</strong> Find guides fast on the Articles page.</span>
-            </li>
-            <li>
-              <span aria-hidden="true" class="bulletIcon">✍️</span>
-              <span><strong>Authoring:</strong> Publishing is limited to the site owner.</span>
-            </li>
-            <li>
-              <span aria-hidden="true" class="bulletIcon">👤</span>
-              <span><strong>Profile:</strong> Set a display name + avatar for authorship.</span>
-            </li>
-          </ul>
-        </div>
-
-        <div aria-label="Quick actions" class="heroCard reveal">
-          <div class="glassCard">
-            <div class="glassHeader">
-              <h2 class="h3">Start here</h2>
-              <p class="muted small">Shortcuts to the main parts of the site.</p>
-            </div>
-
-            <div class="miniGrid">
-              <a class="miniItem" href="./articles.html">
-                <span aria-hidden="true" class="miniIcon">
-                  <svg width="18" height="18" viewBox="0 0 24 24">
-                    <path d="M7 7h10v14H7z" fill="none" stroke="currentColor" stroke-width="1.8"></path>
-                    <path d="M9 10h6M9 13h6M9 16h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
-                    <path d="M7 7l2-3h6l2 3" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"></path>
-                  </svg>
-                </span>
-                <span>Browse articles</span>
-              </a>
-
-              <a class="miniItem" href="./articles.html">
-                <span aria-hidden="true" class="miniIcon">
-                  <svg width="18" height="18" viewBox="0 0 24 24">
-                    <path d="M10 18a8 8 0 1 1 5.29-14.06A8 8 0 0 1 10 18Z" fill="none" stroke="currentColor" stroke-width="1.8"></path>
-                    <path d="M21 21l-4.3-4.3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
-                  </svg>
-                </span>
-                <span>Search + quick tags</span>
-              </a>
-
-              <a class="miniItem" data-auth-target="login-cta" href="./login.html">
-                <span aria-hidden="true" class="miniIcon">
-                  <svg width="18" height="18" viewBox="0 0 24 24">
-                    <path d="M10 17l5-5-5-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
-                    <path d="M15 12H3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
-                    <path d="M21 3v18" fill="none" opacity=".75" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
-                  </svg>
-                </span>
-                <span>Log in</span>
-              </a>
-
-              <a class="miniItem" data-auth-target="login-cta" href="./portal.html">
-                <span aria-hidden="true" class="miniIcon">
-                  <svg width="18" height="18" viewBox="0 0 24 24">
-                    <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Z" fill="none" stroke="currentColor" stroke-width="1.8"></path>
-                    <path d="M2 21c0-4 6-6 10-6s10 2 10 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
-                  </svg>
-                </span>
-                <span>Create an account</span>
-              </a>
-
-              <a class="miniItem" href="./profile.html">
-                <span aria-hidden="true" class="miniIcon">
-                  <svg width="18" height="18" viewBox="0 0 24 24">
-                    <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Z" fill="none" stroke="currentColor" stroke-width="1.8"></path>
-                    <path d="M4 22c1.8-4.2 6.1-6 8-6s6.2 1.8 8 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
-                  </svg>
-                </span>
-                <span>Your profile</span>
-              </a>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="glassFooter">
-              <a class="btn btnGhost btnSm" href="./articles.html">Latest updates</a>
-              <a class="btn btnGhost btnSm" href="./profile.html">Account settings</a>
-            </div>
-          </div>
-          <div aria-hidden="true" class="heroBackdrop"></div>
-        </div>
-      </div>
+              </div>
     </section>
 
     <section class="section" id="latest-articles">
