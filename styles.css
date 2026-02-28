@@ -3749,6 +3749,14 @@ body.isEditingProfile .profileEditOverlay { display: flex; }
   min-height: calc(2 * 1.28em);
 }
 
+/* Hide excerpts (and tag chips) in minimized cards.
+   This prevents long unbroken text (ex: URLs) from bleeding outside the card
+   before an article is expanded. */
+.page-articles #articles.postFeed > .articleCard:not(.isOpen) .articlePreviewExcerpt,
+.page-articles #articles.postFeed > .articleCard:not(.isOpen) .articleTagRow{
+  display: none;
+}
+
 
 /* ============================================================
    Articles page polish (Jan 2026)
