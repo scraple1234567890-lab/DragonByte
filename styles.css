@@ -3681,6 +3681,76 @@ body.isEditingProfile .profileEditOverlay { display: flex; }
 
 
 /* ============================================================
+   Articles page: space-efficient grid layout
+   - Multi-column grid for collapsed article cards
+   - Expanded article spans full width for readability
+   ============================================================ */
+
+.page-articles{
+  --articleCardHeight: 300px;
+  --articleCaptionHeight: 118px;
+}
+
+.page-articles #articles.postFeed{
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  align-items: start;
+  grid-auto-flow: dense;
+  gap: 10px;
+}
+
+.page-articles #articles.postFeed > p{
+  grid-column: 1 / -1;
+}
+
+.page-articles #articles.postFeed > .articleCard.isOpen{
+  grid-column: 1 / -1;
+}
+
+/* Keep collapsed cards consistent height so the grid stays tidy */
+.page-articles #articles.postFeed > .articleCard:not(.isOpen) .articleToggle{
+  height: var(--articleCardHeight);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-articles #articles.postFeed > .articleCard:not(.isOpen) .articlePreview{
+  height: 100%;
+}
+
+.page-articles #articles.postFeed > .articleCard:not(.isOpen) .articlePreviewMedia{
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.page-articles #articles.postFeed > .articleCard:not(.isOpen) .articlePreviewCaption{
+  flex: 0 0 var(--articleCaptionHeight);
+  height: var(--articleCaptionHeight);
+  overflow: hidden;
+}
+
+.page-articles #articles.postFeed > .articleCard:not(.isOpen) .articlePreviewImage{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.page-articles #articles.postFeed > .articleCard:not(.isOpen) .articlePreviewPlaceholder{
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.page-articles #articles.postFeed > .articleCard:not(.isOpen) .articlePreviewTitle{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: calc(2 * 1.28em);
+}
+
+
+/* ============================================================
    Articles page polish (Jan 2026)
    - More breathing room in captions + expanded body
    - Cleaner cover image framing (inset + rounded)
@@ -3922,8 +3992,8 @@ body.isEditingProfile .profileEditOverlay { display: flex; }
 }
 
 #latest-articles .homeArticlesHeader .h2{
-  /* Homepage request: make the "Latest articles" heading white */
-  color: rgba(255,255,255,0.92);
+  /* Homepage: heading should stay readable on the light background */
+  color: rgba(15,23,42,0.92);
 }
 
 /* Homepage previews: reuse the Articles-page miniature card styling */
@@ -4300,17 +4370,3 @@ body {
   display: none !important;
 }
 
-/* Title: solid white (no gradient text fill) */
-.page-articles .articlesHeader { margin-top: 0; }
-.page-articles .articlesHeader .loreTitle {
-  background: none !important;
-  -webkit-background-clip: initial !important;
-  background-clip: initial !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
-
-/* Optional: keep helper text readable on the dark background */
-.page-articles .articlesHeader .muted {
-  color: rgba(255,255,255,0.72);
-}
