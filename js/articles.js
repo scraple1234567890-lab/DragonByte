@@ -334,25 +334,19 @@ function toggleCreateUI(isLoggedIn) {
   setShareButtonEnabled(sharePostButton, isLoggedIn);
   setShareButtonEnabled(shareArticleButton, isAdmin);
 
+  // Hide the "Write an article" button entirely for non-admin users.
+  // (Non-admins should still be able to read/search articles.)
+  if (shareArticleButton instanceof HTMLButtonElement) {
+    shareArticleButton.style.display = isAdmin ? "" : "none";
+    if (!isAdmin) shareArticleButton.setAttribute("aria-expanded", "false");
+  }
+
   // Messaging
   if (mustLogin) {
-    if (!mustLogin.dataset.defaultText) {
-      mustLogin.dataset.defaultText = mustLogin.textContent || "";
-    }
-
-    if (!isLoggedIn) {
-      mustLogin.style.display = "block";
-      mustLogin.textContent = "Log in to access account features. (Only the site owner can publish articles.)";
-    } else if (!ARTICLE_ADMIN_CONFIGURED) {
-      mustLogin.style.display = "block";
-      mustLogin.textContent = "Publishing is locked until the site owner sets ARTICLE_ADMIN_EMAIL or ARTICLE_ADMIN_USER_ID in js/config.js.";
-    } else if (!isAdmin) {
-      mustLogin.style.display = "block";
-      mustLogin.textContent = "You’re logged in, but only the site owner can publish articles.";
-    } else {
-      mustLogin.style.display = "none";
-      mustLogin.textContent = "";
-    }
+    // Keep the Articles page clean: no login/publishing nag text.
+    // The publish UI and button are only visible to the configured admin.
+    mustLogin.style.display = "none";
+    mustLogin.textContent = "";
   }
 
   // Always close composer if the user can't publish

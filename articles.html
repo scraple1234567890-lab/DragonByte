@@ -198,13 +198,14 @@
       </div>
       <div class="articlesTools">
         
-        <button aria-expanded="false" class="btn btnGhost navCta btnSm" id="share-article-btn" type="button">Write an article</button>
+        <!-- Admin-only: shown via js/articles.js when the logged-in user matches ARTICLE_ADMIN_EMAIL/ID -->
+        <button aria-expanded="false" class="btn btnGhost navCta btnSm" id="share-article-btn" type="button" style="display:none">Write an article</button>
         <button class="btn btnGhost btnSm" id="article-search-toggle" type="button" aria-expanded="false" aria-controls="article-search-panel">Search</button>
       
       </div>
     </div>
 
-    <p aria-live="polite" class="muted small" id="must-login" style="margin: 0;">You must be logged in to post.</p>
+    <p aria-live="polite" class="muted small" id="must-login" style="margin: 0; display:none;"></p>
 
     <div class="articleSearchPanel" id="article-search-panel" hidden>
       <div class="articleSearchRow">
