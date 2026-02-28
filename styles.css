@@ -3761,6 +3761,13 @@ body.isEditingProfile .profileEditOverlay { display: flex; }
   padding: 16px 20px 18px;
 }
 
+/* Ensure article titles are dark on the light caption surface */
+.page-articles .articlePreviewTitle,
+.page-articles .articleTitle{
+  color: #000;
+}
+
+
 .page-articles .articleBody{
   /* fallback if page-specific override isn't applied */
   padding-left: 22px;
