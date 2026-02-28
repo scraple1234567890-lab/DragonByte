@@ -4007,8 +4007,8 @@ body.isEditingProfile .profileEditOverlay { display: flex; }
 }
 
 #latest-articles .homeArticlesHeader .h2{
-  /* Homepage: heading should stay readable on the light background */
-  color: rgba(15,23,42,0.92);
+  /* Homepage: Latest articles heading */
+  color: rgba(255,255,255,0.96);
 }
 
 /* Homepage previews: reuse the Articles-page miniature card styling */
