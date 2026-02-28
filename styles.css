@@ -4314,9 +4314,10 @@ body {
 }
 
 
-/* Footer: solid white like header */
+/* Footer: dark like header */
 .siteFooter, .siteFooter.siteFooter--home {
-  background: rgb(247, 249, 255) !important;
+  background: rgba(7, 8, 20, 0.92) !important;
+  border-top: 1px solid var(--stroke) !important;
 }
 
 
