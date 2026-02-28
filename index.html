@@ -8,129 +8,10 @@
   <title>DragonByte — Articles &amp; Runbooks</title>
   <link href="./styles.css" rel="stylesheet"/>
   <link href="./assets/favicon.svg" rel="icon" type="image/svg+xml"/>
-
-  <style>
-    /* =========================
-       HOMEPAGE REDESIGN
-       - Match the rest of the site (light background)
-       - Extend the hero image through the Latest Articles section
-       ========================= */
-
-    /* Override the global “dark home background” rule in styles.css */
-    body.homePage{
-      /* Keep the homepage background consistent (no color "bands" behind sections) */
-      background-image: linear-gradient(180deg, var(--bg), var(--bg2));
-      background-size: auto;
-      background-position: initial;
-      background-attachment: scroll;
-      background-repeat: repeat;
-    }
-    /* Hero image, shared across hero + latest articles */
-    .homeStage{
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid var(--stroke);
-      border-top: 1px solid var(--stroke);
-    }
-    .homeStage::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(2,6,23,0.50), rgba(2,6,23,0.76)),
-        url("./assets/images/index-hero.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      transform: scale(1.02);
-      filter: saturate(0.95) contrast(1.02);
-      pointer-events: none;
-    }
-    .homeStage > *{ position: relative; z-index: 1; }
-
-    /* Keep hero layout the same, but remove borders (now on .homeStage) */
-    .homeHero{
-      position: relative;
-      overflow: hidden;
-      border: 0;
-    }
-
-
-    /* Solo hero layout (no right-side card) */
-    .homeHero .heroGrid{ grid-template-columns: 1fr !important; }
-/* Hero text contrast */
-    .homeHero .heroCopy,
-    .homeHero .heroCopy p,
-    .homeHero .heroCopy li,
-    .homeHero .heroCopy a,
-    .homeHero .heroCopy h1,
-    .homeHero .heroCopy h2{ color: rgba(255,255,255,0.92); }
-    .homeHero .heroCopy .muted{ color: rgba(255,255,255,0.76); }
-    .homeHero .heroCopy .lead{ color: rgba(255,255,255,0.86); }
-    .homeHero .heroCopy h1,
-    .homeHero .heroCopy p,
-    .homeHero .heroCopy li{ text-shadow: 0 2px 18px rgba(0,0,0,0.35); }
-
-    .homeHero .heroBullets li{ color: rgba(255,255,255,0.84); }
-    .homeHero .bulletIcon{
-      background: rgba(255,255,255,0.14);
-      border-color: rgba(255,255,255,0.22);
-      color: rgba(255,255,255,0.92);
-      box-shadow: 0 12px 34px rgba(0,0,0,0.25);
-    }
-
-    .homeHero .heroCopy .btn.btnGhost{
-      border-color: rgba(255,255,255,0.30);
-      background: rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.92);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 16px 42px rgba(0,0,0,0.22);
-    }
-    .homeHero .btn.btnPrimary{
-      border-color: rgba(14,165,233,0.35);
-      box-shadow: 0 22px 70px rgba(0,0,0,0.30);
-    }
-
-    /* Make mini tiles feel clickable when they're links */
-    .homePage a.miniItem{ transition: transform 180ms var(--ease), background 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease); }
-    .homePage a.miniItem:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,0.35);
-      background: rgba(255,255,255,0.16);
-      box-shadow: 0 18px 52px rgba(0,0,0,0.22);
-    }
-
-    /* =========================
-       HEADER: force one horizontal row (desktop)
-       ========================= */
-    @media (min-width: 900px) {
-      .siteHeader .brand { min-width: 0; flex: 0 1 auto; }
-      .siteHeader .brandText { min-width: 0; }
-
-      .siteHeader .nav { flex: 1 1 auto; justify-content: flex-end; }
-
-      .siteHeader .navMenu {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        align-items: center !important;
-        gap: 8px !important;
-        max-width: none !important;
-        white-space: nowrap;
-      }
-
-      .siteHeader .navLink,
-      .siteHeader .navCta { align-items: center; height: 40px; }
-
-      .siteHeader .navLink { padding: 10px 10px; }
-      .siteHeader .navCta { padding: 10px 12px; }
-    }
-  </style>
 </head>
 
 <body class="homePage">
   <a class="skip-link" href="#main">Skip to content</a>
-  <div id="top"></div>
-
   <header class="siteHeader" id="top" role="banner">
     <div class="container headerInner">
       <a aria-label="Go to homepage" class="brand" href="./index.html">
@@ -180,32 +61,37 @@
 <section class="hero section homeHero">
       <div class="container heroGrid">
         <div class="heroCopy reveal">
-<h1 class="h1">DragonByte, distilled</h1>
-          <p class="lead">
-            A small, growing library of practical network setup notes, documentation templates, and outage recovery checklists.
-            Browse the latest articles, or sign in to manage your profile.
-          </p>
+          <div class="heroPanel">
+            <p class="heroEyebrow">Articles • Runbooks • Recovery checklists</p>
+            <h1 class="h1">Practical IT notes for real-world fixes</h1>
+            <p class="lead">
+              Short, usable guides for home and small office networks, written to be followed on calm days and chaotic ones.
+            </p>
 
-          <div class="heroCtas">
-            <a class="btn btnPrimary" href="./articles.html">Browse Articles</a>
-            <a class="btn btnGhost" data-auth-target="login-cta" href="./portal.html">Create account</a>
-            <a class="btn btnGhost" data-auth-target="login-cta" href="./login.html">Log in</a>
+            <div class="heroCtas">
+              <a class="btn btnPrimary" href="./articles.html">Browse articles</a>
+              <a class="btn btnGhost" href="#latest-articles">See what's new</a>
+            </div>
+
+            <p class="muted small heroHint">Search and filter by tags on the Articles page.</p>
           </div>
-</div>
-
-              </div>
+        </div>
+      </div>
     </section>
 
     <section class="section" id="latest-articles">
       <div class="container">
-        <div class="homeArticlesHeader">
-          <h2 class="h2">Latest articles</h2>
-          <div class="homeArticlesActions">
-            <a class="btn btnGhost" href="./articles.html">View all</a>
+        <div class="homeArticlesPanel">
+          <div class="homeArticlesHeader">
+            <h2 class="h2">Latest articles</h2>
+            <div class="homeArticlesActions">
+              <a class="link" href="./articles.html">View all <span aria-hidden="true">→</span></a>
+            </div>
           </div>
-        </div>
-        <div class="postFeed" id="homeArticles">
-          <p class="muted">Loading latest articles...</p>
+
+          <div class="postFeed" id="homeArticles">
+            <p class="muted">Loading latest articles...</p>
+          </div>
         </div>
       </div>
     </section>
