@@ -4323,7 +4323,8 @@ body {
 
 /* Footer: dark like header */
 .siteFooter, .siteFooter.siteFooter--home {
-  background: rgba(7, 8, 20, 0.92) !important;
+  /* Opaque so the homepage photo doesn't tint the footer area */
+  background: rgb(7, 8, 20) !important;
   border-top: 1px solid var(--stroke) !important;
 }
 
