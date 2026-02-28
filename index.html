@@ -13,7 +13,7 @@
     /* =========================
        HOMEPAGE REDESIGN
        - Match the rest of the site (light background)
-       - Keep a hero image only in the hero section
+       - Extend the hero image through the Latest Articles section
        ========================= */
 
     /* Override the global “dark home background” rule in styles.css */
@@ -25,15 +25,14 @@
       background-attachment: scroll;
       background-repeat: repeat;
     }
-
-    /* Hero image, contained */
-    .homeHero{
+    /* Hero image, shared across hero + latest articles */
+    .homeStage{
       position: relative;
       overflow: hidden;
       border-bottom: 1px solid var(--stroke);
       border-top: 1px solid var(--stroke);
     }
-    .homeHero::before{
+    .homeStage::before{
       content:"";
       position:absolute;
       inset:0;
@@ -47,9 +46,16 @@
       filter: saturate(0.95) contrast(1.02);
       pointer-events: none;
     }
-    .homeHero .container{ position: relative; z-index: 1; }
+    .homeStage > *{ position: relative; z-index: 1; }
 
-    /* Hero text contrast */
+    /* Keep hero layout the same, but remove borders (now on .homeStage) */
+    .homeHero{
+      position: relative;
+      overflow: hidden;
+      border: 0;
+    }
+
+/* Hero text contrast */
     .homeHero .heroCopy,
     .homeHero .heroCopy p,
     .homeHero .heroCopy li,
@@ -167,7 +173,8 @@
   </header>
 
   <main id="main">
-    <section class="hero section homeHero">
+        <div class="homeStage">
+<section class="hero section homeHero">
       <div class="container heroGrid">
         <div class="heroCopy reveal">
           <p class="eyebrow">
@@ -290,6 +297,9 @@
         </div>
       </div>
     </section>
+    </div>
+
+
   </main>
 
   <footer class="siteFooter siteFooter--home">
