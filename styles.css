@@ -209,6 +209,28 @@ ul, ol { margin: 0; padding-left: 18px; }
   flex: 0 1 auto;
 }
 
+/* Left cluster: brand + Articles button (desktop) */
+.headerLeft {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.headerArticlesBtn {
+  white-space: nowrap;
+}
+
+/* On small screens, keep header clean: Articles lives in the hamburger menu */
+@media (max-width: 899px){
+  .headerArticlesBtn{ display: none; }
+}
+
+/* On desktop, hide the duplicate Articles button inside the nav row */
+@media (min-width: 900px){
+  .navMenu .navCta--articlesMenu{ display: none; }
+}
+
 /* Logo container (no “box”) */
 .siteHeader .brandMark{
   display: flex;
