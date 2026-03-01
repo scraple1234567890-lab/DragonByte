@@ -1086,14 +1086,16 @@ ul, ol { margin: 0; padding-left: 18px; }
   content:"";
   position: fixed;
   inset: 0;
+  /* Match the homepage look: same image, but with a lighter veil so it reads clearly behind the grid. */
   background:
-    linear-gradient(180deg, rgba(2,6,23,0.52), rgba(2,6,23,0.78)),
+    linear-gradient(180deg, rgba(2,6,23,0.40), rgba(2,6,23,0.62)),
     url("./assets/images/index-hero.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   transform: scale(1.02);
-  filter: saturate(0.95) contrast(1.02);
+  /* Slight lift so the image doesn't look crushed/dim on the Articles page */
+  filter: saturate(0.98) contrast(1.02) brightness(1.14);
   pointer-events: none;
   /* Keep the image behind page content but above the body background
      (matches homepage layering, avoids extra darkening). */
