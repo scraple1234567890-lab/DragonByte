@@ -1076,6 +1076,28 @@ ul, ol { margin: 0; padding-left: 18px; }
   .reveal, .btn, .card, .navMenu, .navLink, .pill, .backToTop { transition: none !important; }
 }
 
+
+/* Articles page: use the same hero background image as the homepage */
+.page-articles.bgHome{
+  position: relative;
+  isolation: isolate;
+}
+.page-articles.bgHome::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(2,6,23,0.52), rgba(2,6,23,0.78)),
+    url("./assets/images/index-hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.02);
+  filter: saturate(0.95) contrast(1.02);
+  pointer-events: none;
+  z-index: -1;
+}
+
 /* ============================================================
    StarSpell compatibility layer (keeps existing markup working)
    while adopting the "NetOps Assist" aesthetic.
