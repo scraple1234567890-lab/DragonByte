@@ -4403,13 +4403,11 @@ body {
 
 /* Center the hero panel in the viewport (and center the text inside it). */
 .homePage .homeHero{
-  /* Fill the visible page (minus header) so the panel can sit dead-center. */
-  min-height: calc(100svh - var(--headerH));
-  min-height: calc(100vh - var(--headerH));
-  padding-top: 0;
-  padding-bottom: 0;
-  display: flex;
-  align-items: center;
+  /* Keep the hero tight so Latest Articles can sit directly below. */
+  min-height: unset;
+  padding-top: 42px;
+  padding-bottom: 18px;
+  display: block;
 }
 
 .homePage .homeHero .heroGrid{
@@ -4474,6 +4472,11 @@ body {
   border: 1px solid rgba(255,255,255,0.12);
   backdrop-filter: blur(14px);
   box-shadow: 0 22px 70px rgba(0,0,0,0.25);
+}
+
+/* Homepage: reduce the gap between hero and Latest Articles */
+.homePage #latest-articles.section{
+  padding-top: 18px;
 }
 
 @media (max-width: 620px){
