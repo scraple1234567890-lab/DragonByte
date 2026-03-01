@@ -4452,6 +4452,26 @@ body {
 .homePage .homeHero .heroPanel .muted{ color: rgba(255,255,255,0.72); }
 .homePage .homeHero .heroPanel .lead{ color: rgba(255,255,255,0.86); }
 
+/* Homepage hero logo mark (big, centered, professional) */
+.homePage .homeHero .homeHeroMark{
+  width: 148px;
+  height: 148px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 40px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 22px 70px rgba(0,0,0,0.30);
+  backdrop-filter: blur(10px);
+}
+.homePage .homeHero .homeHeroMark img{
+  width: 118px;
+  height: 118px;
+  display: block;
+  filter: drop-shadow(0 12px 26px rgba(0,0,0,0.35));
+}
+
 /* Bigger hero typography + CTA (homepage only) */
 .homePage .homeHero .heroPanel .h1{
   font-size: clamp(3.6rem, 5.6vw, 5.4rem);
@@ -4470,12 +4490,33 @@ body {
   min-width: 240px;
 }
 
+/* Small topic chips to make the hero feel less empty while staying clean */
+.homePage .homeHero .homeHeroTopics{
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.homePage .homeHero .homeHeroTopics .chip{
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.86);
+  padding: 8px 12px;
+}
+.homePage .homeHero .homeHeroTopics .chip:hover{
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.26);
+}
+
 @media (max-width: 620px){
   .homePage .homeHero .heroPanel{
     max-width: 100%;
     padding: 38px 22px 32px;
     border-radius: 32px;
   }
+  .homePage .homeHero .homeHeroMark{ width: 120px; height: 120px; border-radius: 32px; margin-bottom: 14px; }
+  .homePage .homeHero .homeHeroMark img{ width: 92px; height: 92px; }
   .homePage .homeHero .heroPanel .h1{ font-size: clamp(2.8rem, 10vw, 3.6rem); }
   .homePage .homeHero .heroCtas .btn{ min-width: 0; width: 100%; }
 }
