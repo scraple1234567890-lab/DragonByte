@@ -1095,8 +1095,13 @@ ul, ol { margin: 0; padding-left: 18px; }
   transform: scale(1.02);
   filter: saturate(0.95) contrast(1.02);
   pointer-events: none;
-  z-index: -1;
+  /* Keep the image behind page content but above the body background
+     (matches homepage layering, avoids extra darkening). */
+  z-index: 0;
 }
+
+/* Ensure page content sits above the background image layer */
+.page-articles.bgHome > *{ position: relative; z-index: 1; }
 
 /* ============================================================
    StarSpell compatibility layer (keeps existing markup working)
@@ -3636,12 +3641,12 @@ body.isEditingProfile .profileEditOverlay { display: flex; }
   line-height: 1.1;
   letter-spacing: -0.02em;
 
-  /* Force solid black title (override gradient text treatment) */
+  /* Force solid white title (override gradient text treatment) */
   background: none;
   -webkit-background-clip: border-box;
   background-clip: border-box;
-  color: #000;
-  -webkit-text-fill-color: #000;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
 }
 
 .page-articles .articlesCard::before{
