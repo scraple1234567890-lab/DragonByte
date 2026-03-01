@@ -4426,9 +4426,10 @@ body {
 }
 
 .homePage .homeHero .heroPanel{
-  max-width: 72ch;
-  padding: 22px 22px 18px;
-  border-radius: 28px;
+  /* Make the hero panel feel like a real centerpiece */
+  max-width: 92ch;
+  padding: 34px 36px 28px;
+  border-radius: 34px;
   background: rgba(7, 8, 20, 0.55);
   border: 1px solid rgba(255,255,255,0.14);
   box-shadow: 0 28px 90px rgba(0,0,0,0.35);
@@ -4442,6 +4443,32 @@ body {
 
 .homePage .homeHero .heroPanel .muted{ color: rgba(255,255,255,0.72); }
 .homePage .homeHero .heroPanel .lead{ color: rgba(255,255,255,0.86); }
+
+/* Bigger hero typography + CTA (homepage only) */
+.homePage .homeHero .heroPanel .h1{
+  font-size: clamp(3.1rem, 4.6vw, 4.3rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.homePage .homeHero .heroPanel .lead{
+  font-size: clamp(1.1rem, 1.6vw, 1.32rem);
+  margin: 0 0 20px;
+}
+.homePage .homeHero .heroCtas .btn{
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  border-radius: 16px;
+}
+
+@media (max-width: 620px){
+  .homePage .homeHero .heroPanel{
+    max-width: 100%;
+    padding: 26px 20px 22px;
+    border-radius: 28px;
+  }
+  .homePage .homeHero .heroPanel .h1{ font-size: clamp(2.4rem, 9vw, 3.2rem); }
+}
 
 .homePage .homeHero .heroEyebrow{
   margin: 0 0 10px;
