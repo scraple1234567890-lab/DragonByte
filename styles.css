@@ -4436,7 +4436,8 @@ body {
 .homePage .homeHero .heroPanel{
   /* Make the hero panel feel like a real centerpiece */
   max-width: min(1100px, 92vw);
-  padding: 62px 72px 56px;
+  /* Slightly tighter top padding so the mark + title sit higher */
+  padding: 46px 72px 56px;
   border-radius: 44px;
   background: rgba(7, 8, 20, 0.55);
   border: 1px solid rgba(255,255,255,0.14);
@@ -4457,7 +4458,8 @@ body {
   /* Make the dragon mark feel like a true centerpiece */
   width: clamp(190px, 20vw, 300px);
   height: clamp(190px, 20vw, 300px);
-  margin: 0 auto 26px;
+  /* Reduce extra breathing room below the logo */
+  margin: 0 auto 14px;
   display: grid;
   place-items: center;
   /* No box/outline around the logo */
@@ -4468,9 +4470,14 @@ body {
   backdrop-filter: none;
 }
 .homePage .homeHero .homeHeroMark img{
-  width: 84%;
-  height: 84%;
+  /* The logo asset has transparent padding; scale it to visually fill the mark */
+  width: 100%;
+  height: 100%;
   display: block;
+  object-fit: contain;
+  transform-origin: center;
+  /* Scale + tiny nudge to remove the visible top/bottom padding in the PNG */
+  transform: scale(1.12) translate(-2%, 1.5%);
   filter: drop-shadow(0 18px 34px rgba(0,0,0,0.35));
 }
 
@@ -4514,16 +4521,16 @@ body {
 @media (max-width: 620px){
   .homePage .homeHero .heroPanel{
     max-width: 100%;
-    padding: 38px 22px 32px;
+    padding: 30px 22px 32px;
     border-radius: 32px;
   }
   .homePage .homeHero .homeHeroMark{
     width: 170px;
     height: 170px;
     border-radius: 0;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
   }
-  .homePage .homeHero .homeHeroMark img{ width: 86%; height: 86%; }
+  .homePage .homeHero .homeHeroMark img{ width: 100%; height: 100%; transform: scale(1.14) translate(-2%, 1.5%); }
   .homePage .homeHero .heroPanel .h1{ font-size: clamp(2.8rem, 10vw, 3.6rem); }
   .homePage .homeHero .heroCtas .btn{ min-width: 0; width: 100%; }
 }
