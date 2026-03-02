@@ -72,6 +72,83 @@ function initSiteHeaderOffsetSync() {
 
 initSiteHeaderOffsetSync();
 
+// =========================
+// Nav search (header)
+// =========================
+
+function initNavSearch() {
+  const form = document.querySelector("form.navSearch");
+  const input = document.getElementById("navSearchInput");
+  if (!(form instanceof HTMLFormElement) || !(input instanceof HTMLInputElement)) return;
+
+  // Pre-fill from URL (?q=...)
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q") || params.get("query") || params.get("search") || "";
+    if (q) input.value = q;
+  } catch (_) {}
+
+  const isArticlesPage = () => {
+    const path = window.location.pathname || "";
+    return path.endsWith("/articles.html") || path.endsWith("articles.html");
+  };
+
+  const updateUrlQuery = (q) => {
+    try {
+      const url = new URL(window.location.href);
+      if (q) url.searchParams.set("q", q);
+      else url.searchParams.delete("q");
+      window.history.replaceState({}, "", url.toString());
+    } catch (_) {}
+  };
+
+  form.addEventListener("submit", (event) => {
+    const q = (input.value || "").trim();
+
+    // If we're already on the articles page, filter in-place (no reload).
+    if (isArticlesPage()) {
+      event.preventDefault();
+
+      const articleSearch = document.getElementById("article-search");
+      const panel = document.getElementById("article-search-panel");
+      const toggle = document.getElementById("article-search-toggle");
+
+      if (articleSearch instanceof HTMLInputElement) {
+        articleSearch.value = q;
+        if (panel instanceof HTMLElement) panel.hidden = false;
+        if (toggle instanceof HTMLButtonElement) toggle.setAttribute("aria-expanded", "true");
+        articleSearch.dispatchEvent(new Event("input", { bubbles: true }));
+        articleSearch.focus();
+        updateUrlQuery(q);
+      }
+
+      return;
+    }
+
+    // Otherwise, allow normal navigation to articles.html with ?q=...
+    if (!q) return;
+    // Ensure the query is present even if the browser doesn't serialize empty fields.
+    try {
+      const target = new URL(form.action || "./articles.html", window.location.href);
+      target.searchParams.set("q", q);
+      window.location.href = target.toString();
+      event.preventDefault();
+    } catch (_) {
+      // fall through
+    }
+  });
+
+  // Keep the header search in sync when the in-page search is used.
+  const articleSearch = document.getElementById("article-search");
+  if (articleSearch instanceof HTMLInputElement) {
+    articleSearch.addEventListener("input", () => {
+      input.value = articleSearch.value;
+    });
+  }
+}
+
+initNavSearch();
+
 
 function escapeHtml(input) {
   const div = document.createElement("div");

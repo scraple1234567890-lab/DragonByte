@@ -67,7 +67,19 @@
 <span aria-hidden="true" class="navToggleBars"></span>
 </button>
 <div class="navMenu" id="navMenu">
-<a class="btn btnGhost navCta" data-auth-target="login-cta" href="./login.html">Log in</a>
+<div class="navRight">
+  <form class="navSearch" role="search" action="./articles.html" method="get">
+    <label class="srOnly" for="navSearchInput">Search articles</label>
+    <div class="navSearchInner">
+      <input class="navSearchInput" id="navSearchInput" name="q" type="search" placeholder="Search articles..." autocomplete="off" />
+      <button class="navSearchBtn" type="submit" aria-label="Search articles">
+        <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M10 18a8 8 0 1 1 5.29-14.03A8 8 0 0 1 10 18Zm0-2a6 6 0 1 0-4.24-1.76A5.98 5.98 0 0 0 10 16Zm9.71 5.29-4.11-4.11a1 1 0 0 1 1.42-1.42l4.11 4.11a1 1 0 0 1-1.42 1.42Z"/>
+        </svg>
+      </button>
+    </div>
+  </form>
+  <a class="btn btnGhost navCta" data-auth-target="login-cta" href="./login.html">Log in</a>
 <div class="profileMenu" data-default-display="inline-flex" id="profileMenu" style="display: none">
 <button aria-controls="profileMenuList" aria-expanded="false" aria-haspopup="menu" aria-label="Open account menu" class="btn ghost profileTrigger" id="profileMenuToggle" type="button">
 <span class="srOnly">Profile</span>
@@ -84,6 +96,7 @@
 <div aria-hidden="true" class="profileMenuList" id="profileMenuList" role="menu">
 <a href="./profile.html" role="menuitem">View profile</a>
 <button id="logoutBtn" role="menuitem" type="button">Log out</button>
+</div>
 </div>
 </div>
 </div>
@@ -141,9 +154,7 @@
 <span class="brandName">DragonByte</span>
 </div>
 <div class="footerContact">
-<p class="muted"><strong>Email:</strong> DragonbyteTechMagic@gmail.com</p>
-<p class="muted"><strong>Phone:</strong> xxx</p>
-</div>
+<p class="muted"><strong>Email:</strong> DragonbyteTechMagic@gmail.com</p></div>
 </div>
 <div aria-label="Quick links" class="footerLinks">
 <h3 class="h4">Quick links</h3>
