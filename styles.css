@@ -1102,14 +1102,26 @@ ul, ol { margin: 0; padding-left: 18px; }
   position: relative;
   isolation: isolate;
 
-  /* Put the image on the page itself (not ::before) so we don't fight the global grid overlay */
+  /* Avoid `background-attachment: fixed` on the body (can cause a visible horizontal seam).
+     We render the image on a fixed ::after layer instead. */
+  background: linear-gradient(180deg, rgba(2,6,23,0.55), rgba(2,6,23,0.85));
+}
+
+/* Fixed background image layer (behind everything) */
+.page-articles.bgHome::after{
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -3;
   background:
     linear-gradient(180deg, rgba(2,6,23,0.28), rgba(2,6,23,0.72)),
     url("./assets/images/articles-page-bg.jpg");
   background-size: auto, cover;
   background-position: center, center;
   background-repeat: no-repeat, no-repeat;
-  background-attachment: scroll, fixed;
+  /* Helps prevent tiny subpixel seams on some GPUs */
+  transform: translateZ(0);
 }
 
 /* Re-assert the global grid overlay on this page (same as body::before) */
@@ -1118,6 +1130,7 @@ ul, ol { margin: 0; padding-left: 18px; }
   position: fixed;
   inset: 0;
   pointer-events: none;
+  z-index: -2;
   opacity: 0.22;
   background-image:
     linear-gradient(to right, rgba(255,255,255,0.040) 1px, transparent 1px),
