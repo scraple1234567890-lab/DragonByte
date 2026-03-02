@@ -1109,7 +1109,7 @@ ul, ol { margin: 0; padding-left: 18px; }
   /* Match the homepage look: same image, but with a lighter veil so it reads clearly behind the grid. */
   background:
     linear-gradient(180deg, rgba(2,6,23,0.40), rgba(2,6,23,0.62)),
-    url("./assets/images/index-hero.jpg");
+    url("./assets/images/articles-page-bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
