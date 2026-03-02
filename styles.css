@@ -2473,8 +2473,42 @@ ul, ol { margin: 0; padding-left: 18px; }
 .articleBody {
   padding: 0 18px 16px;
   border-top: 1px solid rgba(15, 23, 42, 0.10);
+
+  /* Reading mode: when an article is opened, keep it paper-clean
+     regardless of the (image) page background. */
+  background: #ffffff;
+  color: #0f172a;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
 }
 .articleBody p { margin: 12px 0 0; }
+
+/* Improve readability of rich-text content on the light reading surface */
+.articleBody .rtContent h1,
+.articleBody .rtContent h2,
+.articleBody .rtContent h3 {
+  color: #0b1220;
+  margin: 18px 0 10px;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+}
+.articleBody .rtContent h2 { font-size: 1.35rem; }
+.articleBody .rtContent h3 { font-size: 1.12rem; }
+
+.articleBody .rtContent blockquote {
+  margin: 14px 0;
+  padding: 12px 14px;
+  border-left: 3px solid rgba(124,58,237,0.55);
+  background: rgba(124,58,237,0.06);
+  border-radius: 14px;
+}
+
+.articleBody .rtContent hr {
+  border: 0;
+  height: 1px;
+  background: rgba(15, 23, 42, 0.12);
+  margin: 18px 0;
+}
 
 .articleBodyTop { display: flex; justify-content: flex-end; padding-top: 14px; }
 .articleBodyTop + .rtContent { margin-top: 12px; }
@@ -4858,8 +4892,10 @@ body {
 /* Articles: expanded reading surface */
 .page-articles #articles.postFeed > .articleCard.isOpen .articleBody,
 .profilePage #profileArticles.postFeed > .articleCard.isOpen .articleBody{
-  background: rgba(2,6,23,0.56);
-  border-top: 1px solid var(--stroke);
+  /* User request: opened articles should read like a page (white bg, black text) */
+  background: #ffffff;
+  color: #0f172a;
+  border-top: 1px solid rgba(15, 23, 42, 0.10);
 }
 .page-articles #articles > .articleCard:hover,
 .profilePage #profileArticles > .articleCard:hover{
