@@ -223,12 +223,10 @@ ul, ol { margin: 0; padding-left: 18px; }
 
 /* On small screens, keep header clean: Articles lives in the hamburger menu */
 @media (max-width: 899px){
-  .headerArticlesBtn{ display: none; }
-}
-
-/* On desktop, hide the duplicate Articles button inside the nav row */
-@media (min-width: 900px){
-  .navMenu .navCta--articlesMenu{ display: none; }
+  .headerArticlesBtn{ display: inline-flex; }
+  .headerLeft{ gap: 10px; }
+  .brandName{ font-size: 16px; }
+  .brandTag{ display: none; }
 }
 
 /* Logo container (no “box”) */

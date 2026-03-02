@@ -10,6 +10,7 @@ In Supabase:
 Pick **ONE** admin identifier:
 - **Option A (recommended): Admin user UUID**
 - **Option B: Admin email** (works, but depends on the `email` JWT claim)
+- **Option C: Multiple admins** (recommended if you want more than one author)
 
 ### Option A: Admin user UUID (recommended)
 Replace `YOUR_ADMIN_USER_UUID` with the UUID shown for your user in **Auth → Users**.
@@ -106,3 +107,55 @@ using (
 ## Notes
 - If you already had “any authenticated user can insert” policies, remove/disable them, or they will override your intent.
 - If you also want to lock down article cover images, mirror the same idea in Storage bucket policies.
+
+### Option C: Multiple admins (allow-list table)
+
+If you want multiple admin accounts, create an allow-list and reference it in policies.
+
+```sql
+create table if not exists public.article_admins (
+  user_id uuid primary key
+);
+
+-- Add admins
+insert into public.article_admins (user_id)
+values ('YOUR_ADMIN_USER_UUID'::uuid)
+on conflict do nothing;
+
+create policy "Public read articles"
+on public.articles
+for select
+to anon, authenticated
+using (true);
+
+create policy "Admins insert articles"
+on public.articles
+for insert
+to authenticated
+with check (
+  exists (select 1 from public.article_admins a where a.user_id = auth.uid())
+  and user_id = auth.uid()
+);
+
+create policy "Admins update own articles"
+on public.articles
+for update
+to authenticated
+using (
+  exists (select 1 from public.article_admins a where a.user_id = auth.uid())
+  and user_id = auth.uid()
+)
+with check (
+  exists (select 1 from public.article_admins a where a.user_id = auth.uid())
+  and user_id = auth.uid()
+);
+
+create policy "Admins delete own articles"
+on public.articles
+for delete
+to authenticated
+using (
+  exists (select 1 from public.article_admins a where a.user_id = auth.uid())
+  and user_id = auth.uid()
+);
+```
