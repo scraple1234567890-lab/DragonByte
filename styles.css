@@ -1097,33 +1097,34 @@ ul, ol { margin: 0; padding-left: 18px; }
 }
 
 
-/* Articles page: use the same hero background image as the homepage */
+/* Articles page: background image override (keeps global grid overlay on body::before) */
 .page-articles.bgHome{
   position: relative;
   isolation: isolate;
-}
-.page-articles.bgHome::before{
-  content:"";
-  position: fixed;
-  inset: 0;
-  /* Match the homepage look: same image, but with a lighter veil so it reads clearly behind the grid. */
+
+  /* Put the image on the page itself (not ::before) so we don't fight the global grid overlay */
   background:
-    linear-gradient(180deg, rgba(2,6,23,0.40), rgba(2,6,23,0.62)),
+    linear-gradient(180deg, rgba(2,6,23,0.28), rgba(2,6,23,0.72)),
     url("./assets/images/articles-page-bg.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transform: scale(1.02);
-  /* Slight lift so the image doesn't look crushed/dim on the Articles page */
-  filter: saturate(0.98) contrast(1.02) brightness(1.14);
-  pointer-events: none;
-  /* Keep the image behind page content but above the body background
-     (matches homepage layering, avoids extra darkening). */
-  z-index: 0;
+  background-size: auto, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: scroll, fixed;
 }
 
-/* Ensure page content sits above the background image layer */
-.page-articles.bgHome > *{ position: relative; z-index: 1; }
+/* Re-assert the global grid overlay on this page (same as body::before) */
+.page-articles.bgHome::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.040) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.040) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(70% 65% at 50% 20%, rgba(0,0,0,0.85), transparent 75%);
+}
 
 /* ============================================================
    StarSpell compatibility layer (keeps existing markup working)
