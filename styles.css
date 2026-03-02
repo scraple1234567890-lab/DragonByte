@@ -508,6 +508,19 @@ ul, ol { margin: 0; padding-left: 18px; }
   pointer-events: none;
 }
 
+/* Prefer WebP for the homepage hero background when supported. */
+@supports (background-image: image-set(url("./assets/images/index-hero.webp") type("image/webp"))) {
+  .homePage .homeStage::before{
+    background-image:
+      linear-gradient(180deg, rgba(2,6,23,0.52), rgba(2,6,23,0.78)),
+      image-set(
+        url("./assets/images/index-hero.webp") type("image/webp"),
+        url("./assets/images/index-hero.jpg") type("image/jpeg")
+      );
+  }
+}
+
+
 .glassCard {
   position: relative;
   border-radius: var(--radiusLg);
@@ -528,6 +541,19 @@ ul, ol { margin: 0; padding-left: 18px; }
   opacity: 0.70;
   pointer-events: none;
 }
+
+/* Prefer WebP for the homepage hero background when supported. */
+@supports (background-image: image-set(url("./assets/images/index-hero.webp") type("image/webp"))) {
+  .homePage .homeStage::before{
+    background-image:
+      linear-gradient(180deg, rgba(2,6,23,0.52), rgba(2,6,23,0.78)),
+      image-set(
+        url("./assets/images/index-hero.webp") type("image/webp"),
+        url("./assets/images/index-hero.jpg") type("image/jpeg")
+      );
+  }
+}
+
 
 .glassHeader { margin-bottom: 14px; }
 
@@ -1114,7 +1140,7 @@ ul, ol { margin: 0; padding-left: 18px; }
   inset: 0;
   pointer-events: none;
   z-index: -3;
-  background:
+  background-image:
     linear-gradient(180deg, rgba(2,6,23,0.28), rgba(2,6,23,0.72)),
     url("./assets/images/articles-page-bg.jpg");
   background-size: auto, cover;
@@ -1123,6 +1149,19 @@ ul, ol { margin: 0; padding-left: 18px; }
   /* Helps prevent tiny subpixel seams on some GPUs */
   transform: translateZ(0);
 }
+
+/* Prefer WebP backgrounds when supported (faster downloads). */
+@supports (background-image: image-set(url("./assets/images/articles-page-bg.webp") type("image/webp"))) {
+  .page-articles.bgHome::after{
+    background-image:
+      linear-gradient(180deg, rgba(2,6,23,0.28), rgba(2,6,23,0.72)),
+      image-set(
+        url("./assets/images/articles-page-bg.webp") type("image/webp"),
+        url("./assets/images/articles-page-bg.jpg") type("image/jpeg")
+      );
+  }
+}
+
 
 /* Re-assert the global grid overlay on this page (same as body::before) */
 .page-articles.bgHome::before {
@@ -1503,6 +1542,19 @@ ul, ol { margin: 0; padding-left: 18px; }
   color: rgba(15, 23, 42, 0.42);
   pointer-events: none;
 }
+
+/* Prefer WebP for the homepage hero background when supported. */
+@supports (background-image: image-set(url("./assets/images/index-hero.webp") type("image/webp"))) {
+  .homePage .homeStage::before{
+    background-image:
+      linear-gradient(180deg, rgba(2,6,23,0.52), rgba(2,6,23,0.78)),
+      image-set(
+        url("./assets/images/index-hero.webp") type("image/webp"),
+        url("./assets/images/index-hero.jpg") type("image/jpeg")
+      );
+  }
+}
+
 
 .richEditor p { margin: 10px 0; }
 .richEditor div { margin: 10px 0; }
@@ -1892,6 +1944,19 @@ ul, ol { margin: 0; padding-left: 18px; }
   pointer-events: none;
 }
 
+/* Prefer WebP for the homepage hero background when supported. */
+@supports (background-image: image-set(url("./assets/images/index-hero.webp") type("image/webp"))) {
+  .homePage .homeStage::before{
+    background-image:
+      linear-gradient(180deg, rgba(2,6,23,0.52), rgba(2,6,23,0.78)),
+      image-set(
+        url("./assets/images/index-hero.webp") type("image/webp"),
+        url("./assets/images/index-hero.jpg") type("image/jpeg")
+      );
+  }
+}
+
+
 .postsPage .postFooter {
   display: flex;
   align-items: center;
@@ -2037,6 +2102,19 @@ ul, ol { margin: 0; padding-left: 18px; }
   opacity: 0.7;
   pointer-events: none;
 }
+
+/* Prefer WebP for the homepage hero background when supported. */
+@supports (background-image: image-set(url("./assets/images/index-hero.webp") type("image/webp"))) {
+  .homePage .homeStage::before{
+    background-image:
+      linear-gradient(180deg, rgba(2,6,23,0.52), rgba(2,6,23,0.78)),
+      image-set(
+        url("./assets/images/index-hero.webp") type("image/webp"),
+        url("./assets/images/index-hero.jpg") type("image/jpeg")
+      );
+  }
+}
+
 
 .articlesHeader {
   margin-top: 10px; /* clears the top gradient rule */
@@ -2199,6 +2277,19 @@ ul, ol { margin: 0; padding-left: 18px; }
   pointer-events: none;
 }
 
+/* Prefer WebP for the homepage hero background when supported. */
+@supports (background-image: image-set(url("./assets/images/index-hero.webp") type("image/webp"))) {
+  .homePage .homeStage::before{
+    background-image:
+      linear-gradient(180deg, rgba(2,6,23,0.52), rgba(2,6,23,0.78)),
+      image-set(
+        url("./assets/images/index-hero.webp") type("image/webp"),
+        url("./assets/images/index-hero.jpg") type("image/jpeg")
+      );
+  }
+}
+
+
 .articleCard:hover::before,
 .articleCard.isOpen::before {
   opacity: 0.95;
@@ -2314,6 +2405,17 @@ ul, ol { margin: 0; padding-left: 18px; }
   font-size: 0;
   color: transparent;
   text-shadow: none;
+}
+
+
+/* Prefer WebP for the default (no-cover) dragon mark when supported. */
+@supports (background-image: image-set(url("./assets/logo.webp") type("image/webp"))) {
+  .articlePreviewPlaceholderIcon {
+    background-image: image-set(
+      url("./assets/logo.webp") type("image/webp"),
+      url("./assets/logo.png") type("image/png")
+    );
+  }
 }
 
 .articleToggle--hero:hover .articlePreviewImage {
@@ -4490,7 +4592,7 @@ body {
   content:"";
   position:absolute;
   inset:0;
-  background:
+  background-image:
     linear-gradient(180deg, rgba(2,6,23,0.52), rgba(2,6,23,0.78)),
     url("./assets/images/index-hero.jpg");
   background-size: cover;
@@ -4500,6 +4602,19 @@ body {
   filter: saturate(0.95) contrast(1.02);
   pointer-events: none;
 }
+
+/* Prefer WebP for the homepage hero background when supported. */
+@supports (background-image: image-set(url("./assets/images/index-hero.webp") type("image/webp"))) {
+  .homePage .homeStage::before{
+    background-image:
+      linear-gradient(180deg, rgba(2,6,23,0.52), rgba(2,6,23,0.78)),
+      image-set(
+        url("./assets/images/index-hero.webp") type("image/webp"),
+        url("./assets/images/index-hero.jpg") type("image/jpeg")
+      );
+  }
+}
+
 
 .homePage .homeStage > *{ position: relative; z-index: 1; }
 
@@ -4972,3 +5087,54 @@ body {
   color: var(--text);
 }
 
+
+
+/* ============================================================
+   Skeleton loaders (Articles)
+   - Perceived performance: show a stable layout immediately
+   ============================================================ */
+
+.articleCard--skeleton{
+  pointer-events: none;
+  user-select: none;
+}
+
+.articleCard--skeleton .articlePreviewMedia,
+.articleCard--skeleton .articlePreviewCaption{
+  position: relative;
+}
+
+.articleCard--skeleton .sk{
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.06),
+    rgba(255,255,255,0.14),
+    rgba(255,255,255,0.06)
+  );
+  background-size: 200% 100%;
+  animation: skShimmer 1.25s linear infinite;
+  border-radius: 14px;
+}
+
+.articleCard--skeleton .skMedia{
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.articleCard--skeleton .skLine{
+  height: 14px;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+.articleCard--skeleton .skLine--title{ height: 18px; width: 72%; margin-top: 4px; }
+.articleCard--skeleton .skLine--meta{ width: 46%; }
+
+@keyframes skShimmer{
+  0%{ background-position: 200% 0; }
+  100%{ background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .articleCard--skeleton .sk{ animation: none; }
+}

@@ -8,6 +8,10 @@
   <title>DragonByte</title>
   <link href="./styles.css" rel="stylesheet"/>
   <link href="./assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+
+  <link rel="preconnect" href="https://vnwdfitcckglvqaaohrm.supabase.co" crossorigin>
+  <link rel="preload" as="image" href="./assets/images/index-hero.webp" type="image/webp">
+
 </head>
 
 <body class="homePage">
@@ -17,7 +21,7 @@
       <div class="headerLeft">
 <a aria-label="Go to homepage" class="brand" href="./index.html">
         <span aria-hidden="true" class="brandMark">
-          <img alt="" loading="lazy" src="./assets/logo.png"/>
+          <img alt="" decoding="async" height="84" width="84" src="./assets/logo.png"/>
         </span>
         <span class="brandText">
           <span class="brandName">DragonByte</span>
@@ -67,7 +71,7 @@
         <div class="heroCopy reveal">
           <div class="heroPanel">
             <div class="homeHeroMark">
-              <img alt="DragonByte logo" loading="lazy" src="./assets/logo.png"/>
+              <img alt="DragonByte logo" decoding="async" fetchpriority="high" height="300" width="300" src="./assets/logo.png"/>
             </div>
             <h1 class="h1">DragonByte</h1>
             <p class="lead">Practical IT notes for real-world fixes.</p>

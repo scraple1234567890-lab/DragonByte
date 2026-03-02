@@ -54,6 +54,7 @@ if (!(mount instanceof HTMLElement)) {
     const img = document.createElement("img");
     img.alt = "User profile picture";
     img.loading = "lazy";
+    img.decoding = "async";
 
     const src = loadStoredAvatar(userId);
     if (src) {
@@ -104,6 +105,8 @@ if (!(mount instanceof HTMLElement)) {
         const img = document.createElement("img");
         img.className = "articlePreviewImage";
         img.loading = "lazy";
+        img.decoding = "async";
+    img.decoding = "async";
         img.alt = `Cover image for ${row.title || "article"}`;
         img.src = row.image_url;
         media.appendChild(img);

@@ -505,6 +505,7 @@ function createAvatarElement(userId) {
   const img = document.createElement("img");
   img.alt = "User profile picture";
   img.loading = "lazy";
+  img.decoding = "async";
 
   const src = getAvatarForUser(userId);
   if (src) {
@@ -2280,6 +2281,7 @@ function renderArticles(articles, query = "") {
       const img = document.createElement("img");
       img.className = "articlePreviewImage";
       img.loading = "lazy";
+  img.decoding = "async";
       img.alt = `Cover image for ${row.title || "article"}`;
       img.src = row.image_url;
       media.appendChild(img);
@@ -2483,9 +2485,52 @@ async function loadPosts() {
   }
 }
 
+
+function renderArticleSkeleton(count = 6) {
+  if (!(articlesContainer instanceof HTMLElement)) return;
+
+  const frag = document.createDocumentFragment();
+
+  for (let i = 0; i < count; i += 1) {
+    const card = document.createElement("article");
+    card.className = "card articleCard articleCard--skeleton";
+
+    const toggle = document.createElement("div");
+    toggle.className = "articleToggle articleToggle--hero";
+
+    const preview = document.createElement("div");
+    preview.className = "articlePreview";
+
+    const media = document.createElement("div");
+    media.className = "articlePreviewMedia";
+    const skMedia = document.createElement("div");
+    skMedia.className = "sk skMedia";
+    media.appendChild(skMedia);
+
+    const caption = document.createElement("div");
+    caption.className = "articlePreviewCaption";
+
+    const lineTitle = document.createElement("div");
+    lineTitle.className = "sk skLine skLine--title";
+    const lineMeta = document.createElement("div");
+    lineMeta.className = "sk skLine skLine--meta";
+
+    caption.append(lineTitle, lineMeta);
+
+    preview.append(media, caption);
+    toggle.appendChild(preview);
+    card.appendChild(toggle);
+    frag.appendChild(card);
+  }
+
+  articlesContainer.innerHTML = "";
+  articlesContainer.appendChild(frag);
+}
+
+
 async function loadArticles() {
   if (articlesContainer) {
-    articlesContainer.innerHTML = "<p class=\"muted\">Loading articles...</p>";
+    renderArticleSkeleton(6);
   }
 
   try {
