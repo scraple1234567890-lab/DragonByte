@@ -2491,8 +2491,6 @@ ul, ol { margin: 0; padding-left: 18px; }
   border: 1px solid var(--stroke2);
   background: linear-gradient(180deg, var(--card2), var(--card));
   box-shadow: var(--shadow);
-  z-index: 1101;
-  pointer-events: auto;
 }
 
 .profileMenu.open .profileMenuList { display: flex; }
@@ -4917,9 +4915,3 @@ body {
   color: var(--text);
 }
 
-
-
-/* PATCH: Dropdown safety */
-.siteHeader{ overflow: visible; }
-.navMenu{ overflow: visible; }
-.headerGlow{ pointer-events: none; }
