@@ -71,7 +71,10 @@ const MAX_IMAGE_DIMENSION = 1600; // longest edge after resize
 const TARGET_IMAGE_BYTES = 1200 * 1024; // ~1.2MB target
 const MAX_OPTIMIZED_IMAGE_BYTES = 1800 * 1024; // ~1.8MB hard-ish ceiling
 
+const LOGIN_STATE_KEY = "auth:isLoggedIn";
+
 let currentUser = null;
+let isAdminUser = false;
 
 // =========================
 // Article publishing permissions
@@ -80,13 +83,65 @@ const ADMIN_EMAIL = String(ARTICLE_ADMIN_EMAIL || "").trim().toLowerCase();
 const ADMIN_USER_ID = String(ARTICLE_ADMIN_USER_ID || "").trim();
 const ARTICLE_ADMIN_CONFIGURED = Boolean(ADMIN_EMAIL || ADMIN_USER_ID);
 
-function isArticleAdmin(user) {
+function isArticleAdminFromConfig(user) {
   if (!ARTICLE_ADMIN_CONFIGURED) return false;
   if (!user) return false;
   if (ADMIN_USER_ID && user.id === ADMIN_USER_ID) return true;
   const email = String(user.email || "").trim().toLowerCase();
   return Boolean(ADMIN_EMAIL && email && email === ADMIN_EMAIL);
 }
+
+// =========================
+// Header auth sync (keeps header menu accurate even when session is restored)
+// =========================
+function setLoginStateFlag(isLoggedIn) {
+  try {
+    if (isLoggedIn) localStorage.setItem(LOGIN_STATE_KEY, "true");
+    else localStorage.removeItem(LOGIN_STATE_KEY);
+  } catch (error) {
+    console.warn("Unable to persist auth visibility state", error);
+  }
+}
+
+function syncHeaderAuthUI(isLoggedIn) {
+  // Login CTA(s)
+  document.querySelectorAll('[data-auth-target="login-cta"]').forEach((el) => {
+    if (!(el instanceof HTMLElement)) return;
+    if (!el.dataset.defaultDisplay) el.dataset.defaultDisplay = el.style.display || "";
+    el.style.display = isLoggedIn ? "none" : el.dataset.defaultDisplay;
+  });
+
+  // Profile dropdown container
+  const profileMenu = document.getElementById("profileMenu");
+  if (profileMenu instanceof HTMLElement) {
+    if (!profileMenu.dataset.defaultDisplay) {
+      profileMenu.dataset.defaultDisplay =
+        profileMenu.style.display && profileMenu.style.display !== "none" ? profileMenu.style.display : "inline-flex";
+    }
+    profileMenu.style.display = isLoggedIn ? profileMenu.dataset.defaultDisplay : "none";
+    if (!isLoggedIn) profileMenu.classList.remove("open");
+  }
+}
+
+async function isArticleAdminFromAllowList(user) {
+  if (!user?.id) return false;
+  try {
+    const { data, error } = await supabase
+      .from("article_admins")
+      .select("user_id")
+      .eq("user_id", user.id)
+      .maybeSingle();
+
+    if (error) {
+      // Table might not exist yet, or RLS might block.
+      return false;
+    }
+    return Boolean(data?.user_id);
+  } catch {
+    return false;
+  }
+}
+
 
 /* =========================
    Tab key support in editors
@@ -320,7 +375,7 @@ function closeComposer(card, button) {
 }
 
 function toggleCreateUI(isLoggedIn) {
-  const isAdmin = isLoggedIn && isArticleAdmin(currentUser);
+  const isAdmin = isLoggedIn && isAdminUser;
 
   // Show/hide forms, keep feeds visible for everyone
   if (postForm) {
@@ -2569,7 +2624,7 @@ async function handleArticleSubmit(event) {
     return;
   }
 
-  if (!isArticleAdmin(currentUser)) {
+  if (!isArticleAdminFromConfig(currentUser)) {
     const msg = ARTICLE_ADMIN_CONFIGURED
       ? "Only the site owner can publish or edit articles."
       : "Publishing is locked until the site owner sets ARTICLE_ADMIN_EMAIL or ARTICLE_ADMIN_USER_ID in js/config.js.";
@@ -2755,20 +2810,40 @@ async function refreshAuthUI() {
     const { data, error } = await supabase.auth.getSession();
     if (error) throw error;
     currentUser = data?.session?.user ?? null;
+
+    // Determine admin status (config first, then optional DB allow-list)
+    isAdminUser = Boolean(currentUser && isArticleAdminFromConfig(currentUser));
+    if (currentUser && !isAdminUser) {
+      isAdminUser = await isArticleAdminFromAllowList(currentUser);
+    }
+
     if (currentUser) {
       const dn = getUserDisplayNameOrFallback(currentUser);
       saveStoredDisplayName(currentUser.id, dn);
     }
 
-    toggleCreateUI(Boolean(currentUser));
+    const isLoggedIn = Boolean(currentUser);
+    setLoginStateFlag(isLoggedIn);
+    syncHeaderAuthUI(isLoggedIn);
+
+    // Helpful diagnostics (shows up in DevTools console)
+    if (currentUser) {
+      console.info("[DragonByte] Auth user", { email: currentUser.email, id: currentUser.id, isAdminUser });
+    }
+
+    toggleCreateUI(isLoggedIn);
     applyArticleSearch();
   } catch (error) {
     console.error("Error checking auth status", error);
     currentUser = null;
+    isAdminUser = false;
+    setLoginStateFlag(false);
+    syncHeaderAuthUI(false);
     toggleCreateUI(false);
     applyArticleSearch();
   }
 }
+
 
 function subscribeToRealtime() {
   if (!postsChannel) {
@@ -3038,13 +3113,24 @@ async function init() {
   wireAvatarRefresh();
   subscribeToRealtime();
 
-  supabase.auth.onAuthStateChange((_event, session) => {
+  supabase.auth.onAuthStateChange(async (_event, session) => {
     currentUser = session?.user ?? null;
+
+    isAdminUser = Boolean(currentUser && isArticleAdminFromConfig(currentUser));
+    if (currentUser && !isAdminUser) {
+      isAdminUser = await isArticleAdminFromAllowList(currentUser);
+    }
+
     if (currentUser) {
       const dn = getUserDisplayNameOrFallback(currentUser);
       saveStoredDisplayName(currentUser.id, dn);
     }
-    toggleCreateUI(Boolean(currentUser));
+
+    const isLoggedIn = Boolean(currentUser);
+    setLoginStateFlag(isLoggedIn);
+    syncHeaderAuthUI(isLoggedIn);
+
+    toggleCreateUI(isLoggedIn);
     applyArticleSearch();
   });
 }
