@@ -2306,8 +2306,8 @@ ul, ol { margin: 0; padding-left: 18px; }
   height: 88px;
   display: block;
 
-  /* Use the site mark instead of a text star */
-  background: url("./assets/logo.svg") center / contain no-repeat;
+  /* Use the DragonByte dragon mark instead of the crescent */
+  background: url("./assets/logo.png") center / contain no-repeat;
   filter: drop-shadow(0 18px 34px rgba(2, 6, 23, 0.55));
 
   /* Hide the placeholder glyph (✷) without changing markup */
